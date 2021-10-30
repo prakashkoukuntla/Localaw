@@ -1,9 +1,6 @@
 //
-//  AppDelegate.swift
-//  Localaw
-//
-//  Created by Prakash Koukuntla on 10/29/21.
-//
+//  Copyright © 2021 Prakash Koukuntla. All rights reserved.
+//  
 
 import UIKit
 import CoreData
