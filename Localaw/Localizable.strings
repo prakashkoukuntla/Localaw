@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Localaw
+
+  Created by Prakash Koukuntla on 11/3/21.
+  Copyright © 2021 Prakash Koukuntla. All rights reserved.
+*/
+"recent_bills" = "Recent Bills";
+"settings" = "Settings";
+"saved_bills" = "Saved Bills";
