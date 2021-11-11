@@ -16,6 +16,7 @@
 		0745AF4527335668000E3500 /* SavedBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0745AF4427335668000E3500 /* SavedBillsViewController.swift */; };
 		0745AF4A273356AF000E3500 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0745AF49273356AF000E3500 /* SettingsViewController.swift */; };
 		0745AF4F273359E5000E3500 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0745AF4E273359E5000E3500 /* Localizable.strings */; };
+		0745C8C0273C9AAC00683633 /* CDBillCategory+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0745C8BF273C9AAC00683633 /* CDBillCategory+Extensions.swift */; };
 		0782BDB4272CB64F001D12C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782BDB3272CB64F001D12C8 /* AppDelegate.swift */; };
 		0782BDB6272CB64F001D12C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782BDB5272CB64F001D12C8 /* SceneDelegate.swift */; };
 		0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782BDB7272CB650001D12C8 /* RecentBillsViewController.swift */; };
@@ -53,6 +54,7 @@
 		0745AF4427335668000E3500 /* SavedBillsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBillsViewController.swift; sourceTree = "<group>"; };
 		0745AF49273356AF000E3500 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0745AF4E273359E5000E3500 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		0745C8BF273C9AAC00683633 /* CDBillCategory+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDBillCategory+Extensions.swift"; sourceTree = "<group>"; };
 		0782BDB0272CB64F001D12C8 /* Localaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Localaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0782BDB3272CB64F001D12C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0782BDB5272CB64F001D12C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				074401502735F5A60080FFD0 /* Legislator.swift */,
 				074401582735F92F0080FFD0 /* Contact.swift */,
 				074401602735FD240080FFD0 /* CDBill+Extensions.swift */,
+				0745C8BF273C9AAC00683633 /* CDBillCategory+Extensions.swift */,
 			);
 			path = Localaw;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */,
 				074401472735F5700080FFD0 /* Committee.swift in Sources */,
 				074401612735FD240080FFD0 /* CDBill+Extensions.swift in Sources */,
+				0745C8C0273C9AAC00683633 /* CDBillCategory+Extensions.swift in Sources */,
 				0782BDB4272CB64F001D12C8 /* AppDelegate.swift in Sources */,
 				0782BDB6272CB64F001D12C8 /* SceneDelegate.swift in Sources */,
 				0745AF4527335668000E3500 /* SavedBillsViewController.swift in Sources */,

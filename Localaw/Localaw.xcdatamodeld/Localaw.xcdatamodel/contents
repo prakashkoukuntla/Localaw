@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1519" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDBill" representedClassName="CDBill" syncable="YES" codeGenerationType="class">
-        <attribute name="billID" optional="YES" attributeType="String"/>
-        <attribute name="longSummary" optional="YES" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="session" optional="YES" attributeType="String"/>
-        <attribute name="shortSummary" optional="YES" attributeType="String"/>
+        <attribute name="cdBillID" optional="YES" attributeType="String"/>
+        <attribute name="cdLongSummary" optional="YES" attributeType="String"/>
+        <attribute name="cdName" optional="YES" attributeType="String"/>
+        <attribute name="cdSession" optional="YES" attributeType="String"/>
+        <attribute name="cdShortSummary" optional="YES" attributeType="String"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBillCategory" inverseName="bills" inverseEntity="CDBillCategory"/>
+    </entity>
+    <entity name="CDBillCategory" representedClassName="CDBillCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="cdIcon" optional="YES" attributeType="Binary"/>
+        <attribute name="cdName" optional="YES" attributeType="String"/>
+        <relationship name="bills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="categories" inverseEntity="CDBill"/>
     </entity>
     <elements>
-        <element name="CDBill" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="CDBill" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="CDBillCategory" positionX="-63" positionY="18" width="128" height="88"/>
     </elements>
 </model>
