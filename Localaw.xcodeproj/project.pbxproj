@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073CDF26273F3BCB00CAD3EB /* County.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073CDF25273F3BCB00CAD3EB /* County.swift */; };
 		074401422735F5580080FFD0 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401412735F5580080FFD0 /* Bill.swift */; };
 		074401472735F5700080FFD0 /* Committee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401462735F5700080FFD0 /* Committee.swift */; };
 		0744014C2735F58E0080FFD0 /* BillCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744014B2735F58E0080FFD0 /* BillCategory.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		073CDF25273F3BCB00CAD3EB /* County.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = County.swift; sourceTree = "<group>"; };
 		074401412735F5580080FFD0 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		074401462735F5700080FFD0 /* Committee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Committee.swift; sourceTree = "<group>"; };
 		0744014B2735F58E0080FFD0 /* BillCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillCategory.swift; sourceTree = "<group>"; };
@@ -96,6 +98,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		073CDF2A273F3FA300CAD3EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				074401412735F5580080FFD0 /* Bill.swift */,
+				074401462735F5700080FFD0 /* Committee.swift */,
+				0744014B2735F58E0080FFD0 /* BillCategory.swift */,
+				074401502735F5A60080FFD0 /* Legislator.swift */,
+				073CDF25273F3BCB00CAD3EB /* County.swift */,
+				074401582735F92F0080FFD0 /* Contact.swift */,
+				073CDF2B273F3FC800CAD3EB /* Core Data */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		073CDF2B273F3FC800CAD3EB /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				074401602735FD240080FFD0 /* CDBill+Extensions.swift */,
+				0745C8BF273C9AAC00683633 /* CDBillCategory+Extensions.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
 		0782BDA7272CB64F001D12C8 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +144,7 @@
 		0782BDB2272CB64F001D12C8 /* Localaw */ = {
 			isa = PBXGroup;
 			children = (
+				073CDF2A273F3FA300CAD3EB /* Model */,
 				0782BDB3272CB64F001D12C8 /* AppDelegate.swift */,
 				0782BDB5272CB64F001D12C8 /* SceneDelegate.swift */,
 				0782BDB7272CB650001D12C8 /* RecentBillsViewController.swift */,
@@ -129,13 +155,6 @@
 				0782BDC4272CB651001D12C8 /* Info.plist */,
 				0782BDBC272CB650001D12C8 /* Localaw.xcdatamodeld */,
 				0745AF4E273359E5000E3500 /* Localizable.strings */,
-				074401412735F5580080FFD0 /* Bill.swift */,
-				074401462735F5700080FFD0 /* Committee.swift */,
-				0744014B2735F58E0080FFD0 /* BillCategory.swift */,
-				074401502735F5A60080FFD0 /* Legislator.swift */,
-				074401582735F92F0080FFD0 /* Contact.swift */,
-				074401602735FD240080FFD0 /* CDBill+Extensions.swift */,
-				0745C8BF273C9AAC00683633 /* CDBillCategory+Extensions.swift */,
 			);
 			path = Localaw;
 			sourceTree = "<group>";
@@ -298,6 +317,7 @@
 				0782BDB6272CB64F001D12C8 /* SceneDelegate.swift in Sources */,
 				0745AF4527335668000E3500 /* SavedBillsViewController.swift in Sources */,
 				074401592735F92F0080FFD0 /* Contact.swift in Sources */,
+				073CDF26273F3BCB00CAD3EB /* County.swift in Sources */,
 				0744014C2735F58E0080FFD0 /* BillCategory.swift in Sources */,
 				074401422735F5580080FFD0 /* Bill.swift in Sources */,
 				0782BDBE272CB650001D12C8 /* Localaw.xcdatamodeld in Sources */,

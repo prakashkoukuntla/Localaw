@@ -6,15 +6,18 @@ import Foundation
 
 extension CDBill: Bill {
     var subjects: [BillCategory] {
-        categories as? Set<CDBillCategory>
+        print(cdSubjects)
+        return []
     }
     
     var sponsors: [Legislator] {
-        <#code#>
+        print(cdSponsors)
+        return []
     }
     
     var committees: [Committee] {
-        <#code#>
+        print(cdCommittees)
+        return []
     }
     
     var name: String { cdName ?? "" }

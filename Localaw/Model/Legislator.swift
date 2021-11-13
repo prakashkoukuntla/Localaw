@@ -12,6 +12,6 @@ protocol Legislator {
     var party: String { get }
     var leadershipPosition: String { get }
     var committeeAssignments: [Committee] { get }
-    var county: [String] { get }
+    var counties: [County] { get }
     var district: Int { get }
 }
