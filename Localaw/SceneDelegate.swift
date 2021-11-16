@@ -19,11 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         window = UIWindow(windowScene: scene)
-        let viewControllerRecentBills = RecentBillsViewController()
-        let viewControllerSavedBills = SavedBillsViewController()
-        let viewControllerSettings = SettingsViewController()
         let tabBar = UITabBarController()
-        tabBar.viewControllers = [viewControllerRecentBills, viewControllerSavedBills, viewControllerSettings]
+        tabBar.viewControllers = [
+            makeRecentBillsViewController(),
+            makeSavedBillsViewController(),
+            makeSettingsViewController()
+        ]
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
     }
@@ -62,3 +63,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 }
 
+// MARK: - Factory
+extension SceneDelegate {
+    func makeSettingsViewController() -> UIViewController {
+        let controller = SettingsViewController()
+        let navigationController = UINavigationController(rootViewController: controller)
+        return navigationController
+    }
+    
+    func makeRecentBillsViewController() -> UIViewController {
+        let controller = RecentBillsViewController()
+        let navigationController = UINavigationController(rootViewController: controller)
+        return navigationController
+    }
+    
+    func makeSavedBillsViewController() -> UIViewController {
+        let controller = SavedBillsViewController()
+        let navigationController = UINavigationController(rootViewController: controller)
+        return navigationController
+    }
+}

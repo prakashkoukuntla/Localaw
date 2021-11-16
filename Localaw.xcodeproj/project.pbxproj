@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073C231D2743363B009FC216 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C231C2743363B009FC216 /* TextFieldCell.swift */; };
+		073C23222743364C009FC216 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C23212743364C009FC216 /* ToggleCell.swift */; };
+		073C23272743365F009FC216 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C23262743365F009FC216 /* TextCell.swift */; };
 		073CDF26273F3BCB00CAD3EB /* County.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073CDF25273F3BCB00CAD3EB /* County.swift */; };
 		074401422735F5580080FFD0 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401412735F5580080FFD0 /* Bill.swift */; };
 		074401472735F5700080FFD0 /* Committee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401462735F5700080FFD0 /* Committee.swift */; };
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		073C231C2743363B009FC216 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		073C23212743364C009FC216 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
+		073C23262743365F009FC216 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		073CDF25273F3BCB00CAD3EB /* County.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = County.swift; sourceTree = "<group>"; };
 		074401412735F5580080FFD0 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		074401462735F5700080FFD0 /* Committee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Committee.swift; sourceTree = "<group>"; };
@@ -150,6 +156,9 @@
 				0782BDB7272CB650001D12C8 /* RecentBillsViewController.swift */,
 				0745AF4427335668000E3500 /* SavedBillsViewController.swift */,
 				0745AF49273356AF000E3500 /* SettingsViewController.swift */,
+				073C231C2743363B009FC216 /* TextFieldCell.swift */,
+				073C23212743364C009FC216 /* ToggleCell.swift */,
+				073C23262743365F009FC216 /* TextCell.swift */,
 				0782BDBF272CB651001D12C8 /* Assets.xcassets */,
 				0782BDC1272CB651001D12C8 /* LaunchScreen.storyboard */,
 				0782BDC4272CB651001D12C8 /* Info.plist */,
@@ -310,6 +319,7 @@
 			files = (
 				074401512735F5A60080FFD0 /* Legislator.swift in Sources */,
 				0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */,
+				073C23272743365F009FC216 /* TextCell.swift in Sources */,
 				074401472735F5700080FFD0 /* Committee.swift in Sources */,
 				074401612735FD240080FFD0 /* CDBill+Extensions.swift in Sources */,
 				0745C8C0273C9AAC00683633 /* CDBillCategory+Extensions.swift in Sources */,
@@ -321,7 +331,9 @@
 				0744014C2735F58E0080FFD0 /* BillCategory.swift in Sources */,
 				074401422735F5580080FFD0 /* Bill.swift in Sources */,
 				0782BDBE272CB650001D12C8 /* Localaw.xcdatamodeld in Sources */,
+				073C23222743364C009FC216 /* ToggleCell.swift in Sources */,
 				0745AF4A273356AF000E3500 /* SettingsViewController.swift in Sources */,
+				073C231D2743363B009FC216 /* TextFieldCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
