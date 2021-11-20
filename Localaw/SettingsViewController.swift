@@ -62,6 +62,11 @@ extension SettingsViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath)
+            if let cell = cell as? TextFieldCell {
+                cell.textField.delegate = self
+                cell.textField.placeholder = "example@email.com"
+                cell.textField.text = UserDefaults.standard.string(forKey: "email")
+            }
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "ToggleCell", for: indexPath)
         case 2:
@@ -73,6 +78,26 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Title"
+        switch section {
+        case 0:
+            return "Email Information"
+        case 1:
+            return "Notifications"
+        case 2:
+            return "Other"
+        default:
+            return nil
+        }
+    }
+}
+
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UserDefaults.standard.setValue(textField.text, forKey: "email")
     }
 }
