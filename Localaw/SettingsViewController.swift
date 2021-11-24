@@ -62,19 +62,63 @@ extension SettingsViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath)
-            if let cell = cell as? TextFieldCell {
-                cell.textField.delegate = self
-                cell.textField.placeholder = "example@email.com"
-                cell.textField.text = UserDefaults.standard.string(forKey: "email")
-            }
+            guard let textFieldCell = cell as? TextFieldCell else { return cell }
+            textFieldCell.textField.delegate = self
+            textFieldCell.textField.placeholder = "example@email.com"
+            textFieldCell.textField.text = UserDefaults.standard.string(forKey: "email")
+            
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "ToggleCell", for: indexPath)
+            guard let toggleCell = cell as? ToggleCell else { return cell }
+            switch indexPath.row {
+            case 0:
+                toggleCell.textLabel?.text = "Notify for Saved Bill Updates"
+                toggleCell.toggle.isOn = UserDefaults.standard.bool(forKey: "Saved")
+                toggleCell.toggle.addAction(.init(handler: { (action) in
+                    if let sender = action.sender as? UISwitch {
+                        UserDefaults.standard.set(sender.isOn, forKey: "Saved")
+                    }
+                }), for: .valueChanged)
+            case 1:
+                toggleCell.textLabel?.text = "Notify for Recent Bill Updates"
+                toggleCell.toggle.isOn = UserDefaults.standard.bool(forKey: "Recent")
+                toggleCell.toggle.addAction(.init(handler: { (action) in
+                    if let sender = action.sender as? UISwitch {
+                        UserDefaults.standard.set(sender.isOn, forKey: "Recent")
+                    }
+                }), for: .valueChanged)
+            default:
+                fatalError()
+            }
+            
+
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
+            cell.accessoryType = .disclosureIndicator
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Privacy Policy"
+            case 1:
+                cell.textLabel?.text = "App Feedback"
+            case 2:
+                cell.textLabel?.text = "About Us"
+            default:
+                fatalError()
+            }
         default:
             fatalError()
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch (indexPath.section, indexPath.row) {
+        case (2, 0):
+            UIApplication.shared.open(URL(string: "https://google.com")!, options: [:], completionHandler: nil)
+        
+        default:
+            break
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
