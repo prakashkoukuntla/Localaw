@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class SettingsViewController: UIViewController {
     
@@ -115,10 +116,14 @@ extension SettingsViewController: UITableViewDataSource {
         switch (indexPath.section, indexPath.row) {
         case (2, 0):
             UIApplication.shared.open(URL(string: "https://google.com")!, options: [:], completionHandler: nil)
-        
+        case (2, 1):
+            sendEmail()
+        case (2, 2):
+            UIApplication.shared.open(URL(string: "https://localaw.weebly.com")!, options: [:], completionHandler: nil)
         default:
             break
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -143,5 +148,28 @@ extension SettingsViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         UserDefaults.standard.setValue(textField.text, forKey: "email")
+    }
+}
+
+extension SettingsViewController: MFMailComposeViewControllerDelegate {
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["pkoukuntla1@gmail.com"])
+            mail.setSubject("Localaw Feedback")
+            //mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+            let alert = UIAlertController(title: "Error", message: "This device is not configured to send emails", preferredStyle: .alert)
+            alert.addAction(.init(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }

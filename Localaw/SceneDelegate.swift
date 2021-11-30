@@ -27,6 +27,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         ]
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
+        //guard !UserDefaults.standard.bool(forKey: "wasLaunched") else { return }
+        UserDefaults.standard.set(true, forKey: "wasLaunched")
+        let controller = CategorySelectionViewController()
+        tabBar.present(controller, animated: true, completion: nil)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
