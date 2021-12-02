@@ -10,6 +10,8 @@
 		073C231D2743363B009FC216 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C231C2743363B009FC216 /* TextFieldCell.swift */; };
 		073C23222743364C009FC216 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C23212743364C009FC216 /* ToggleCell.swift */; };
 		073C23272743365F009FC216 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C23262743365F009FC216 /* TextCell.swift */; };
+		073C25B8275845B9002B278A /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C25B7275845B9002B278A /* CategorySelectionView.swift */; };
+		073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C25BC27584763002B278A /* UIView+Extensions.swift */; };
 		073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */; };
 		073CDF26273F3BCB00CAD3EB /* County.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073CDF25273F3BCB00CAD3EB /* County.swift */; };
 		074401422735F5580080FFD0 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401412735F5580080FFD0 /* Bill.swift */; };
@@ -53,6 +55,8 @@
 		073C231C2743363B009FC216 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		073C23212743364C009FC216 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
 		073C23262743365F009FC216 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
+		073C25B7275845B9002B278A /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
+		073C25BC27584763002B278A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionViewController.swift; sourceTree = "<group>"; };
 		073CDF25273F3BCB00CAD3EB /* County.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = County.swift; sourceTree = "<group>"; };
 		074401412735F5580080FFD0 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				0745AF4427335668000E3500 /* SavedBillsViewController.swift */,
 				0745AF49273356AF000E3500 /* SettingsViewController.swift */,
 				073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */,
+				073C25B7275845B9002B278A /* CategorySelectionView.swift */,
+				073C25BC27584763002B278A /* UIView+Extensions.swift */,
 				073C231C2743363B009FC216 /* TextFieldCell.swift */,
 				073C23212743364C009FC216 /* ToggleCell.swift */,
 				073C23262743365F009FC216 /* TextCell.swift */,
@@ -322,9 +328,11 @@
 			files = (
 				074401512735F5A60080FFD0 /* Legislator.swift in Sources */,
 				073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */,
+				073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */,
 				0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */,
 				073C23272743365F009FC216 /* TextCell.swift in Sources */,
 				074401472735F5700080FFD0 /* Committee.swift in Sources */,
+				073C25B8275845B9002B278A /* CategorySelectionView.swift in Sources */,
 				074401612735FD240080FFD0 /* CDBill+Extensions.swift in Sources */,
 				0745C8C0273C9AAC00683633 /* CDBillCategory+Extensions.swift in Sources */,
 				0782BDB4272CB64F001D12C8 /* AppDelegate.swift in Sources */,

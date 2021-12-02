@@ -20,18 +20,15 @@ class CategorySelectionViewController: UIViewController {
         containerView.backgroundColor = .white
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 10
         stackView.addArrangedSubview(makeWelcomeLabel())
         stackView.addArrangedSubview(makeColoradoLabel())
         stackView.addArrangedSubview(makeLogoImageView())
-        containerView.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            //stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            
-        ])
+        stackView.addArrangedSubview(makeDescriptionLabel())
+        stackView.addArrangedSubview(CategorySelectionView())
+        containerView.embed(view: stackView,
+                            padding: .init(top: 20, left: 0, bottom: 0, right: 0))
         view = containerView
     }
     
@@ -55,6 +52,13 @@ class CategorySelectionViewController: UIViewController {
             imageView.widthAnchor.constraint(equalToConstant: 100)
         ])
         return imageView
+    }
+    
+    func makeDescriptionLabel() -> UILabel {
+        let label = UILabel()
+        label.text = "Learn about your community's legislation. To get started, select bill categories you're interested in:"
+        label.numberOfLines = 0
+        return label
     }
     
 }

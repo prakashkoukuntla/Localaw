@@ -10,16 +10,11 @@ class TextFieldCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         textField = UITextField()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(textField)
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        contentView.embed(
+            view: textField,
+            padding: .init(top: 0, left: 20, bottom: 0, right: 0),
+            height: 44)
         textField.setContentCompressionResistancePriority(.required, for: .vertical)
-        NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            textField.topAnchor.constraint(equalTo: contentView.topAnchor),
-            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 44)
-        ])
     }
     
     required init?(coder: NSCoder) {
