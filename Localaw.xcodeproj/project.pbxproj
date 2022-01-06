@@ -14,6 +14,7 @@
 		073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C25BC27584763002B278A /* UIView+Extensions.swift */; };
 		073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */; };
 		073CDF26273F3BCB00CAD3EB /* County.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073CDF25273F3BCB00CAD3EB /* County.swift */; };
+		07411BFD278675590020F233 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07411BFC278675590020F233 /* TagCell.swift */; };
 		074401422735F5580080FFD0 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401412735F5580080FFD0 /* Bill.swift */; };
 		074401472735F5700080FFD0 /* Committee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401462735F5700080FFD0 /* Committee.swift */; };
 		0744014C2735F58E0080FFD0 /* BillCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744014B2735F58E0080FFD0 /* BillCategory.swift */; };
@@ -59,6 +60,7 @@
 		073C25BC27584763002B278A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionViewController.swift; sourceTree = "<group>"; };
 		073CDF25273F3BCB00CAD3EB /* County.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = County.swift; sourceTree = "<group>"; };
+		07411BFC278675590020F233 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		074401412735F5580080FFD0 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		074401462735F5700080FFD0 /* Committee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Committee.swift; sourceTree = "<group>"; };
 		0744014B2735F58E0080FFD0 /* BillCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillCategory.swift; sourceTree = "<group>"; };
@@ -133,6 +135,17 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		07411C01278675750020F233 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				07411BFC278675590020F233 /* TagCell.swift */,
+				073C231C2743363B009FC216 /* TextFieldCell.swift */,
+				073C23212743364C009FC216 /* ToggleCell.swift */,
+				073C23262743365F009FC216 /* TextCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0782BDA7272CB64F001D12C8 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				073CDF2A273F3FA300CAD3EB /* Model */,
+				07411C01278675750020F233 /* Cells */,
 				0782BDB3272CB64F001D12C8 /* AppDelegate.swift */,
 				0782BDB5272CB64F001D12C8 /* SceneDelegate.swift */,
 				0782BDB7272CB650001D12C8 /* RecentBillsViewController.swift */,
@@ -165,9 +179,6 @@
 				073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */,
 				073C25B7275845B9002B278A /* CategorySelectionView.swift */,
 				073C25BC27584763002B278A /* UIView+Extensions.swift */,
-				073C231C2743363B009FC216 /* TextFieldCell.swift */,
-				073C23212743364C009FC216 /* ToggleCell.swift */,
-				073C23262743365F009FC216 /* TextCell.swift */,
 				0782BDBF272CB651001D12C8 /* Assets.xcassets */,
 				0782BDC1272CB651001D12C8 /* LaunchScreen.storyboard */,
 				0782BDC4272CB651001D12C8 /* Info.plist */,
@@ -340,6 +351,7 @@
 				0745AF4527335668000E3500 /* SavedBillsViewController.swift in Sources */,
 				074401592735F92F0080FFD0 /* Contact.swift in Sources */,
 				073CDF26273F3BCB00CAD3EB /* County.swift in Sources */,
+				07411BFD278675590020F233 /* TagCell.swift in Sources */,
 				0744014C2735F58E0080FFD0 /* BillCategory.swift in Sources */,
 				074401422735F5580080FFD0 /* Bill.swift in Sources */,
 				0782BDBE272CB650001D12C8 /* Localaw.xcdatamodeld in Sources */,
