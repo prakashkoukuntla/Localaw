@@ -11,6 +11,19 @@ class TagCell: UICollectionViewCell {
         label = UILabel()
         super.init(frame: frame)
         contentView.embed(view: label)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+             
+             NSLayoutConstraint.activate([
+                 contentView.leftAnchor.constraint(equalTo: leftAnchor),
+                 contentView.rightAnchor.constraint(equalTo: rightAnchor),
+                 contentView.topAnchor.constraint(equalTo: topAnchor),
+                 contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
+             ])
+        //contentView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            contentView.widthAnchor.constraint(equalToConstant: 10),
+//            contentView.heightAnchor.constraint(equalToConstant: 50)
+//        ])
     }
 
     required init?(coder: NSCoder) {

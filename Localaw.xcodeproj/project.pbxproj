@@ -14,6 +14,7 @@
 		073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C25BC27584763002B278A /* UIView+Extensions.swift */; };
 		073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */; };
 		073CDF26273F3BCB00CAD3EB /* County.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073CDF25273F3BCB00CAD3EB /* County.swift */; };
+		073F190327890D7D000EFBB0 /* TagViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F190227890D7D000EFBB0 /* TagViewLayout.swift */; };
 		07411BFD278675590020F233 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07411BFC278675590020F233 /* TagCell.swift */; };
 		074401422735F5580080FFD0 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401412735F5580080FFD0 /* Bill.swift */; };
 		074401472735F5700080FFD0 /* Committee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401462735F5700080FFD0 /* Committee.swift */; };
@@ -60,6 +61,7 @@
 		073C25BC27584763002B278A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionViewController.swift; sourceTree = "<group>"; };
 		073CDF25273F3BCB00CAD3EB /* County.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = County.swift; sourceTree = "<group>"; };
+		073F190227890D7D000EFBB0 /* TagViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewLayout.swift; sourceTree = "<group>"; };
 		07411BFC278675590020F233 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		074401412735F5580080FFD0 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		074401462735F5700080FFD0 /* Committee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Committee.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				0745AF49273356AF000E3500 /* SettingsViewController.swift */,
 				073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */,
 				073C25B7275845B9002B278A /* CategorySelectionView.swift */,
+				073F190227890D7D000EFBB0 /* TagViewLayout.swift */,
 				073C25BC27584763002B278A /* UIView+Extensions.swift */,
 				0782BDBF272CB651001D12C8 /* Assets.xcassets */,
 				0782BDC1272CB651001D12C8 /* LaunchScreen.storyboard */,
@@ -348,6 +351,7 @@
 				0745C8C0273C9AAC00683633 /* CDBillCategory+Extensions.swift in Sources */,
 				0782BDB4272CB64F001D12C8 /* AppDelegate.swift in Sources */,
 				0782BDB6272CB64F001D12C8 /* SceneDelegate.swift in Sources */,
+				073F190327890D7D000EFBB0 /* TagViewLayout.swift in Sources */,
 				0745AF4527335668000E3500 /* SavedBillsViewController.swift in Sources */,
 				074401592735F92F0080FFD0 /* Contact.swift in Sources */,
 				073CDF26273F3BCB00CAD3EB /* County.swift in Sources */,

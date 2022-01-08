@@ -7,6 +7,8 @@ import UIKit
 
 class CategorySelectionViewController: UIViewController {
     
+    var categorySelectionView = CategorySelectionView()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -26,10 +28,16 @@ class CategorySelectionViewController: UIViewController {
         stackView.addArrangedSubview(makeColoradoLabel())
         stackView.addArrangedSubview(makeLogoImageView())
         stackView.addArrangedSubview(makeDescriptionLabel())
-        stackView.addArrangedSubview(CategorySelectionView())
+        stackView.addArrangedSubview(categorySelectionView)
+        
         containerView.embed(view: stackView,
                             padding: .init(top: 20, left: 0, bottom: 0, right: 0))
         view = containerView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        categorySelectionView.applyInitialSnapshot()
     }
     
     func makeWelcomeLabel() -> UILabel {
