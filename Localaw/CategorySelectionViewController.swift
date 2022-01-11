@@ -6,11 +6,12 @@ import Foundation
 import UIKit
 
 class CategorySelectionViewController: UIViewController {
-    
+    lazy var numberSelectedLabel = makeNumberSelectedLabel()
     var categorySelectionView = CategorySelectionView()
     
     init() {
         super.init(nibName: nil, bundle: nil)
+        categorySelectionView.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -29,6 +30,8 @@ class CategorySelectionViewController: UIViewController {
         stackView.addArrangedSubview(makeLogoImageView())
         stackView.addArrangedSubview(makeDescriptionLabel())
         stackView.addArrangedSubview(categorySelectionView)
+        stackView.addArrangedSubview(numberSelectedLabel)
+        stackView.addArrangedSubview(makeContinueButton())
         
         containerView.embed(view: stackView,
                             padding: .init(top: 20, left: 0, bottom: 0, right: 0))
@@ -37,6 +40,7 @@ class CategorySelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isModalInPresentation = true
         categorySelectionView.applyInitialSnapshot()
     }
     
@@ -44,6 +48,26 @@ class CategorySelectionViewController: UIViewController {
         let label = UILabel()
         label.text = "Welcome To:"
         return label
+    }
+    
+    func makeContinueButton() -> UIButton {
+        let button = UIButton()
+        button.setTitle("Continue", for: .normal)
+        button.addAction(.init(handler: { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
+        }), for: .touchUpInside)
+        button.setTitleColor(.black, for: .normal)
+        return button
+    }
+    
+    func makeNumberSelectedLabel() -> UILabel {
+        let label = UILabel()
+        label.text = makeNumberSelectedLabelText(number: 0)
+        return label
+    }
+    
+    func makeNumberSelectedLabelText(number: Int) -> String {
+        return "Number Selected: \(number)"
     }
     
     func makeColoradoLabel() -> UILabel {
@@ -69,4 +93,10 @@ class CategorySelectionViewController: UIViewController {
         return label
     }
     
+}
+
+extension CategorySelectionViewController: CategorySelectionDelegate {
+    func numberOfSelectedCategoriesChanged(to number: Int) {
+        numberSelectedLabel.text = makeNumberSelectedLabelText(number: number)
+    }
 }

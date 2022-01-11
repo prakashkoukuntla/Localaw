@@ -5,9 +5,16 @@
 import Foundation
 import UIKit
 
+protocol CategorySelectionDelegate: AnyObject {
+    func numberOfSelectedCategoriesChanged(to number: Int)
+}
+
 class CategorySelectionView: UIView {
     var selectAllView: UIView
     var tagView: UICollectionView
+    var selectedCategories = Set<String>()
+    weak var delegate: CategorySelectionDelegate?
+    
     lazy var dataSource: UICollectionViewDiffableDataSource<Int, String> = {
         UICollectionViewDiffableDataSource<Int, String>(collectionView: tagView, cellProvider: {collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Tag", for: indexPath)
@@ -52,8 +59,23 @@ class CategorySelectionView: UIView {
         
         dataSource.apply(initialSnapshot, animatingDifferences: false, completion: nil)
     }
+    
+    
+    
 }
 
 extension CategorySelectionView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let category = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        if selectedCategories.contains(category) {
+            selectedCategories.remove(category)
+        } else {
+            selectedCategories.insert(category)
+        }
+        
+        print(selectedCategories)
+        delegate?.numberOfSelectedCategoriesChanged(to: selectedCategories.count)
+        
+    }
 }
