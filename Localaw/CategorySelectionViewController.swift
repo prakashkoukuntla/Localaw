@@ -54,7 +54,10 @@ class CategorySelectionViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Continue", for: .normal)
         button.addAction(.init(handler: { [weak self] _ in
-            self?.dismiss(animated: true, completion: nil)
+            guard let self = self else { return }
+            let categories = Array(self.categorySelectionView.selectedCategories)
+            UserDefaults.standard.set(categories, forKey: "selectedCategories")
+            self.dismiss(animated: true, completion: nil)
         }), for: .touchUpInside)
         button.setTitleColor(.black, for: .normal)
         return button

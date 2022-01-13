@@ -34,9 +34,16 @@ class CategorySelectionView: UIView {
         layout.estimatedItemSize = .init(width: 1, height: 1)
         //layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         tagView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        tagView.backgroundColor = .orange
+        tagView.backgroundColor = .white
+        tagView.layer.borderColor = UIColor.lightGray.cgColor
+        tagView.layer.borderWidth = 1
+        tagView.layer.cornerRadius = 8
+        tagView.layer.masksToBounds = true
+        tagView.layer.cornerCurve = .continuous
+        tagView.allowsMultipleSelection = true
+        tagView.contentInset = .init(top: 10, left: 10, bottom: 10, right: 10)
         super.init(frame: .zero)
-        backgroundColor = .gray
+        //backgroundColor = .gray
         let stack = UIStackView(arrangedSubviews: [/*selectAllView,*/tagView])
         
         // re add select all view
@@ -67,15 +74,26 @@ class CategorySelectionView: UIView {
 extension CategorySelectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let category = dataSource.itemIdentifier(for: indexPath) else { return }
-        
-        if selectedCategories.contains(category) {
-            selectedCategories.remove(category)
-        } else {
-            selectedCategories.insert(category)
-        }
-        
+        selectedCategories.insert(category)
         print(selectedCategories)
         delegate?.numberOfSelectedCategoriesChanged(to: selectedCategories.count)
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let category = dataSource.itemIdentifier(for: indexPath) else { return true }
+        if selectedCategories.contains(category) {
+            collectionView.deselectItem(at: indexPath, animated: false)
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let category = dataSource.itemIdentifier(for: indexPath) else { return }
+        selectedCategories.remove(category)
+        print(selectedCategories)
+        delegate?.numberOfSelectedCategoriesChanged(to: selectedCategories.count)
     }
 }
