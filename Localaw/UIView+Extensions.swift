@@ -9,7 +9,7 @@ extension UIView {
     func embed(view: UIView, padding: UIEdgeInsets = .zero, width: CGFloat? = nil, height: CGFloat? = nil) {
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
-        let bottom = bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: padding.bottom)
+        let bottom = safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: padding.bottom)
         bottom.priority = .defaultLow
         
         NSLayoutConstraint.activate([

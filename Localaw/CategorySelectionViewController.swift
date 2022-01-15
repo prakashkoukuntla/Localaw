@@ -31,10 +31,11 @@ class CategorySelectionViewController: UIViewController {
         stackView.addArrangedSubview(makeDescriptionLabel())
         stackView.addArrangedSubview(categorySelectionView)
         stackView.addArrangedSubview(numberSelectedLabel)
+        stackView.addArrangedSubview(SpacerView())
         stackView.addArrangedSubview(makeContinueButton())
         
         containerView.embed(view: stackView,
-                            padding: .init(top: 20, left: 0, bottom: 0, right: 0))
+                            padding: .init(top: 20, left: 20, bottom: 20, right: 20))
         view = containerView
     }
     
@@ -59,7 +60,20 @@ class CategorySelectionViewController: UIViewController {
             UserDefaults.standard.set(categories, forKey: "selectedCategories")
             self.dismiss(animated: true, completion: nil)
         }), for: .touchUpInside)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .purple
+        button.layer.borderColor = UIColor.clear.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 8
+        button.layer.cornerCurve = .continuous
+        button.layer.masksToBounds = true
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .medium)
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: 120),
+            button.heightAnchor.constraint(equalToConstant: 44),
+            //button.leadingAnchor.constraint(equalToConstant: 110),
+            //button.widthAnchor.constraint(equalToConstant: 110),
+        ])
         return button
     }
     

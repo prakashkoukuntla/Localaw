@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073B37E12792494800896EF5 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073B37E02792494800896EF5 /* SpacerView.swift */; };
 		073C231D2743363B009FC216 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C231C2743363B009FC216 /* TextFieldCell.swift */; };
 		073C23222743364C009FC216 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C23212743364C009FC216 /* ToggleCell.swift */; };
 		073C23272743365F009FC216 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C23262743365F009FC216 /* TextCell.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		073B37E02792494800896EF5 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		073C231C2743363B009FC216 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		073C23212743364C009FC216 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
 		073C23262743365F009FC216 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				0745AF4427335668000E3500 /* SavedBillsViewController.swift */,
 				0745AF49273356AF000E3500 /* SettingsViewController.swift */,
 				073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */,
+				073B37E02792494800896EF5 /* SpacerView.swift */,
 				073C25B7275845B9002B278A /* CategorySelectionView.swift */,
 				073F190227890D7D000EFBB0 /* TagViewLayout.swift */,
 				073C25BC27584763002B278A /* UIView+Extensions.swift */,
@@ -343,6 +346,7 @@
 				074401512735F5A60080FFD0 /* Legislator.swift in Sources */,
 				073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */,
 				073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */,
+				073B37E12792494800896EF5 /* SpacerView.swift in Sources */,
 				0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */,
 				073C23272743365F009FC216 /* TextCell.swift in Sources */,
 				074401472735F5700080FFD0 /* Committee.swift in Sources */,

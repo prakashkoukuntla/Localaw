@@ -48,7 +48,21 @@ class CategorySelectionView: UIView {
         
         // re add select all view
         
-        embed(view: stack, width: 300, height: 300)
+        //embed(view: stack, width: 300, height: 300)
+        embed(view: stack)
+        let lessThanAnchor = tagView.heightAnchor.constraint(lessThanOrEqualToConstant: 300)
+        lessThanAnchor.priority = .required
+        let greaterThanAnchor = tagView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
+        greaterThanAnchor.priority = .required
+        let heightAnchor = tagView.heightAnchor.constraint(equalToConstant: 300)
+        heightAnchor.priority = .defaultLow
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: 300),
+            heightAnchor,
+            lessThanAnchor,
+            greaterThanAnchor
+        ])
+
         tagView.delegate = self
         tagView.dataSource = dataSource
         tagView.register(TagCell.self, forCellWithReuseIdentifier: "Tag")
