@@ -12,6 +12,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let bill = CDBill(context: persistentContainer.viewContext)
+        bill.cdName = "name"
+        bill.cdSession = "session"
+        let legislator = CDLegislator(context: persistentContainer.viewContext)
+        legislator.cdName = "first last"
+        legislator.cdEmail = "politicsstuff@colorado.co"
+        legislator.cdParty = "green"
+        legislator.addToCdBills(bill)
+        let county = CDCounty(context: persistentContainer.viewContext)
+        county.cdCounty = "big"
+        county.addToCdLegislators(legislator)
+        try! persistentContainer.viewContext.save()
         return true
     }
 
