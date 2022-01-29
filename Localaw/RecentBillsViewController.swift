@@ -21,8 +21,6 @@ class RecentBillsViewController: UIViewController {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.register(TextFieldCell.self, forCellReuseIdentifier: "TextFieldCell")
-        //tableView.register(ToggleCell.self, forCellReuseIdentifier: "ToggleCell")
         tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
         view = tableView
     }
