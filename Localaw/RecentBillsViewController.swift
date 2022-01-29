@@ -58,6 +58,10 @@ class RecentBillsViewController: UIViewController {
     // MARK: - View lifecycle
     
     override func loadView() {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
         view = tableView
     }
     
