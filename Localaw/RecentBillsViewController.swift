@@ -100,11 +100,6 @@ class RecentBillsViewController: UIViewController {
 
 extension RecentBillsViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let array = UserDefaults.standard.array(forKey: "selectedCategories") as? [String] else { return nil }
-        return array[section]
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = BillDetailViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -117,7 +112,7 @@ extension RecentBillsViewController: UITableViewDataSource {
         fetchedResultsController.sections?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let sections = fetchedResultsController.sections else { return nil }
         return sections[section].indexTitle ?? ""
     }
