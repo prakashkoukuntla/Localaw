@@ -14,4 +14,5 @@ protocol Bill {
     var sponsors: [Legislator] { get }
     var committees: [Committee] { get }
     
+    var dateIntroduced: Date { get }
 }
