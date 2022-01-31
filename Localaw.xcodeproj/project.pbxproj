@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035225FE27A4C397006A8DED /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035225FD27A4C397006A8DED /* Database.swift */; };
 		073B37E12792494800896EF5 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073B37E02792494800896EF5 /* SpacerView.swift */; };
 		073C231D2743363B009FC216 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C231C2743363B009FC216 /* TextFieldCell.swift */; };
 		073C23222743364C009FC216 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C23212743364C009FC216 /* ToggleCell.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		035225FD27A4C397006A8DED /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		073B37E02792494800896EF5 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		073C231C2743363B009FC216 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		073C23212743364C009FC216 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
@@ -118,7 +120,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		073CDF2A273F3FA300CAD3EB /* Model */ = {
+		035225FC27A4C38E006A8DED /* Entity Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				074401412735F5580080FFD0 /* Bill.swift */,
@@ -127,7 +129,16 @@
 				074401502735F5A60080FFD0 /* Legislator.swift */,
 				073CDF25273F3BCB00CAD3EB /* County.swift */,
 				074401582735F92F0080FFD0 /* Contact.swift */,
+			);
+			path = "Entity Protocols";
+			sourceTree = "<group>";
+		};
+		073CDF2A273F3FA300CAD3EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				035225FC27A4C38E006A8DED /* Entity Protocols */,
 				073CDF2B273F3FC800CAD3EB /* Core Data */,
+				035225FD27A4C397006A8DED /* Database.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -349,6 +360,7 @@
 				074401512735F5A60080FFD0 /* Legislator.swift in Sources */,
 				073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */,
 				073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */,
+				035225FE27A4C397006A8DED /* Database.swift in Sources */,
 				073B37E12792494800896EF5 /* SpacerView.swift in Sources */,
 				0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */,
 				073C23272743365F009FC216 /* TextCell.swift in Sources */,
