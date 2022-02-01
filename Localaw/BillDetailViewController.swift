@@ -1,17 +1,13 @@
 //
 //  Copyright © 2022 Prakash Koukuntla. All rights reserved.
 //
+
 import Foundation
 import UIKit
 
-struct SummaryItem: Hashable, Identifiable {
-    let id = UUID()
-    var content: String
-}
-
 struct BillStatus: Hashable, Identifiable {
     let id = UUID()
-    var statues: [Status]
+    var statuses: [Status]
     
     enum Status {
         case introduced
@@ -19,6 +15,57 @@ struct BillStatus: Hashable, Identifiable {
         case signed
         case inDiscussion
     }
+}
+
+struct Sponsors: Hashable, Identifiable {
+    static func == (lhs: Sponsors, rhs: Sponsors) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    let id = UUID()
+    var sponsors: [Legislator]
+}
+
+struct TitleElements: Hashable, Identifiable {
+    let id = UUID()
+    var title: String
+    var saved: Bool
+    var notificationsOn: Bool
+}
+
+struct Categories: Hashable, Identifiable {
+    static func == (lhs: Categories, rhs: Categories) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    let id = UUID()
+    var categories: [BillCategory]
+}
+
+struct Committees: Hashable, Identifiable {
+    static func == (lhs: Committees, rhs: Committees) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    let id = UUID()
+    var sentateCommittees: [Committee]
+}
+
+struct SummaryItem: Hashable, Identifiable {
+    let id = UUID()
+    var content: String
 }
 
 enum BillDetailSection: Int, CaseIterable, Comparable {
@@ -78,7 +125,7 @@ class BillDetailViewController: UIViewController {
     func applyInitialSnapshot() {
         var initialSnapshot = NSDiffableDataSourceSnapshot<BillDetailSection, BillDetailItem>()
         initialSnapshot.appendSections([.billStatus])
-        initialSnapshot.appendItems([.billStatus(.init(statues: [.passed, .inDiscussion, .introduced]))])
+        initialSnapshot.appendItems([.billStatus(.init(statuses: [.passed, .inDiscussion, .introduced]))])
         dataSource.apply(initialSnapshot, animatingDifferences: false, completion: nil)
     }
     
