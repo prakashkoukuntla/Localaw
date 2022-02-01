@@ -13,6 +13,6 @@ protocol Bill {
     var subjects: [BillCategory] { get }
     var sponsors: [Legislator] { get }
     var committees: [Committee] { get }
-    
+
     var dateIntroduced: Date { get }
 }

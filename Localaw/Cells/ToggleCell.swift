@@ -14,9 +14,9 @@ class ToggleCell: UITableViewCell {
     }
     override func prepareForReuse() {
         super.prepareForReuse()
-        //toggle.removeAction(, for: .valueChanged)
+        // toggle.removeAction(, for: .valueChanged)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

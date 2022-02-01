@@ -11,14 +11,14 @@ extension UIView {
         addSubview(view)
         let bottom = safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: padding.bottom)
         bottom.priority = .defaultLow
-        
+
         NSLayoutConstraint.activate([
             view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left),
             trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding.right),
             view.topAnchor.constraint(equalTo: topAnchor, constant: padding.top),
             bottom
         ])
-        
+
         if let width = width {
             NSLayoutConstraint.activate([
                 widthAnchor.constraint(equalToConstant: width)

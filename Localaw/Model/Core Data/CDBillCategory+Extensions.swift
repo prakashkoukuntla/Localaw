@@ -7,7 +7,7 @@ import UIKit
 
 extension CDBillCategory: BillCategory {
     var name: String { cdName ?? "" }
-    
+
     var icon: UIImage {
         if let icon = cdIcon, let image = UIImage(data: icon) {
             return image

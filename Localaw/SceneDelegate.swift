@@ -6,11 +6,11 @@ import UIKit
 import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
+
     // MARK: - Variables
-    
+
     var window: UIWindow?
-    
+
     lazy var tabBar: UITabBarController = {
         let tabBar = UITabBarController()
         tabBar.viewControllers = [
@@ -20,26 +20,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         ]
         return tabBar
     }()
-    
+
     var database: Database {
-        (UIApplication.shared.delegate as! AppDelegate).database
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("The application did not launch properly.")
+        }
+        return delegate.database
     }
-    
+
     // MARK: - Scene lifecycle
-    
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
+
         guard let scene = scene as? UIWindowScene else {
             assertionFailure("Failed to get the scene")
             return
         }
-        
+
         window = UIWindow(windowScene: scene)
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
         showBillCategoriesModalIfNeeded()
     }
-    
+
     func sceneDidEnterBackground(_ scene: UIScene) {
         database.saveContext()
     }
@@ -48,10 +51,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 // MARK: - Configuration
 
 extension SceneDelegate {
-    
+
     func showBillCategoriesModalIfNeeded() {
         UserDefaults.standard.set(true, forKey: "wasLaunched")
-        guard let _ = UserDefaults.standard.array(forKey: "selectedCategories") else  {
+        guard let _ = UserDefaults.standard.array(forKey: "selectedCategories") else {
             let controller = CategorySelectionViewController()
             tabBar.present(controller, animated: true, completion: nil)
             return
@@ -67,13 +70,13 @@ extension SceneDelegate {
         let navigationController = UINavigationController(rootViewController: controller)
         return navigationController
     }
-    
+
     func makeRecentBillsViewController(context: NSManagedObjectContext) -> UIViewController {
         let controller = RecentBillsViewController(context: context)
         let navigationController = UINavigationController(rootViewController: controller)
         return navigationController
     }
-    
+
     func makeSavedBillsViewController() -> UIViewController {
         let controller = SavedBillsViewController()
         let navigationController = UINavigationController(rootViewController: controller)

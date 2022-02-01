@@ -5,7 +5,7 @@
 import UIKit
 
 class SavedBillsViewController: UIViewController {
-    
+
     init() {
         super.init(nibName: nil, bundle: nil)
         tabBarItem.image = UIImage(systemName: "bookmark.fill")
@@ -15,7 +15,7 @@ class SavedBillsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         let tableView = UITableView()
         tableView.delegate = self
@@ -23,14 +23,14 @@ class SavedBillsViewController: UIViewController {
         tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
         view = tableView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
         // Do any additional setup after loading the view.
     }
-    
+
     @objc func isClicked(_ item: UIBarButtonItem) {
         print("hi")
     }
@@ -48,11 +48,11 @@ extension SavedBillsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         UserDefaults.standard.array(forKey: "selectedCategories")?.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
         if let cell = cell as? TextCell {

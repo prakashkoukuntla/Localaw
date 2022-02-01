@@ -40,7 +40,7 @@ class TagCell: UICollectionViewCell {
 //        contentView.layer.cornerCurve = .continuous
 //        contentView.layer.masksToBounds = true
         isSelected = false
-             
+
              NSLayoutConstraint.activate([
                 contentView.leftAnchor.constraint(equalTo: leftAnchor),
                  contentView.rightAnchor.constraint(equalTo: rightAnchor),

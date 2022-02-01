@@ -16,7 +16,7 @@ class TextFieldCell: UITableViewCell {
             height: 44)
         textField.setContentCompressionResistancePriority(.required, for: .vertical)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

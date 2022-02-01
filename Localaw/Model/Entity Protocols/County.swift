@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol County  {
+protocol County {
     var name: String { get }
 }

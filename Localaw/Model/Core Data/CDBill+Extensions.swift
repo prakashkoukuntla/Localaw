@@ -12,7 +12,7 @@ extension CDBill: Bill {
         }
         return subjects
     }
-    
+
     var sponsors: [Legislator] {
         guard let sponsors = cdSponsors?.allObjects as? [Legislator] else {
             assertionFailure("Failed to unwrap the subjects")
@@ -20,7 +20,7 @@ extension CDBill: Bill {
         }
         return sponsors
     }
-    
+
     var committees: [Committee] {
         guard let committees = cdCommittees?.allObjects as? [Committee] else {
             assertionFailure("Failed to unwrap the subjects")
@@ -28,17 +28,17 @@ extension CDBill: Bill {
         }
         return committees
     }
-    
+
     var name: String { cdName ?? "" }
-    
+
     var longSummary: String { cdLongSummary ?? "" }
-    
+
     var shortSummary: String { cdShortSummary ?? "" }
-    
+
     var session: String { cdSession ?? "" }
-    
+
     var billID: String { cdBillID ?? "" }
-    
+
     var dateIntroduced: Date { cdDateIntroduced ?? .distantPast }
-    
+
 }

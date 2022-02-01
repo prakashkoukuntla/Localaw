@@ -11,5 +11,5 @@ protocol Committee {
     var email: String { get }
     var members: [Legislator] { get }
     var type: String { get }
-    
+
 }

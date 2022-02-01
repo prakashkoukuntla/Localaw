@@ -6,9 +6,9 @@ import UIKit
 import CoreData
 
 class RecentBillsViewController: UIViewController {
-    
+
     // MARK: - Variables
-    
+
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -16,17 +16,17 @@ class RecentBillsViewController: UIViewController {
         tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
         return tableView
     }()
-    
+
     weak var context: NSManagedObjectContext?
-    
+
     /// The `fetchedResultsController` is an object that listens to changes in the CoreData managed
     /// object context and will help update the table view (via the delegate that we specify)
     lazy var fetchedResultsController: NSFetchedResultsController<CDBill> = {
-        
+
         guard let context = context else {
             fatalError("If there's no context, the app should crash.")
         }
-        
+
         /// A fetch request is responsible for narrowing down which data to search the database for. The first
         /// filter is by entity type (in this case `CDBill`) and we can narrow it further with a predicate.
         let fetchRequest: NSFetchRequest<CDBill> = CDBill.fetchRequest()
@@ -38,25 +38,25 @@ class RecentBillsViewController: UIViewController {
         controller.delegate = self
         return controller
     }()
-    
+
     // MARK: - Initialization
-    
+
     init(context: NSManagedObjectContext) {
         self.context = context
-        
+
         super.init(nibName: nil, bundle: nil)
-        
+
         tabBarItem.image = UIImage(systemName: "envelope.fill")
         tabBarItem.title = NSLocalizedString("recent_bills", comment: "")
         title = NSLocalizedString("recent_bills", comment: "")
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - View lifecycle
-    
+
     override func loadView() {
         let tableView = UITableView()
         tableView.delegate = self
@@ -64,24 +64,22 @@ class RecentBillsViewController: UIViewController {
         tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
         view = tableView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationController()
-        
+
         /// Tells the fetchedResultsController to get all of the relevant `CDBills` from the data base as well as
         /// to begin monitoring for update events
         do {
             try fetchedResultsController.performFetch()
-        }
-        catch
-        {
+        } catch {
             assertionFailure(error.localizedDescription)
         }
     }
-    
+
     // MARK: - Configuration
-    
+
     private func configureNavigationController() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -90,16 +88,16 @@ class RecentBillsViewController: UIViewController {
             target: self,
             action: #selector(isClicked(_:)))
     }
-    
+
     // MARK: - Actions
-    
+
     @objc func isClicked(_ item: UIBarButtonItem) {
         print("Filter")
     }
 }
 
 extension RecentBillsViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = BillDetailViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -107,21 +105,21 @@ extension RecentBillsViewController: UITableViewDelegate {
 }
 
 extension RecentBillsViewController: UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         fetchedResultsController.sections?.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let sections = fetchedResultsController.sections else { return nil }
         return sections[section].indexTitle ?? ""
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = fetchedResultsController.sections else { return 0 }
         return sections[section].numberOfObjects
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let bill = fetchedResultsController.object(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
@@ -132,14 +130,12 @@ extension RecentBillsViewController: UITableViewDataSource {
     }
 }
 
-extension RecentBillsViewController: NSFetchedResultsControllerDelegate
-{
+extension RecentBillsViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?)
-    {
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             guard let newIndexPath = newIndexPath else { return }
@@ -158,7 +154,7 @@ extension RecentBillsViewController: NSFetchedResultsControllerDelegate
             assertionFailure("Failed to handle an unknown default: \(type)")
         }
     }
-    
+
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }

@@ -6,5 +6,5 @@ import Foundation
 import UIKit
 
 class TextCell: UITableViewCell {
-    
+
 }
