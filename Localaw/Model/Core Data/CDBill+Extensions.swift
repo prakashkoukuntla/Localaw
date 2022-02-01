@@ -6,18 +6,27 @@ import Foundation
 
 extension CDBill: Bill {
     var subjects: [BillCategory] {
-        print(cdSubjects)
-        return []
+        guard let subjects = cdSubjects?.allObjects as? [BillCategory] else {
+            assertionFailure("Failed to unwrap the subjects")
+            return []
+        }
+        return subjects
     }
     
     var sponsors: [Legislator] {
-        print(cdSponsors)
-        return []
+        guard let sponsors = cdSponsors?.allObjects as? [Legislator] else {
+            assertionFailure("Failed to unwrap the subjects")
+            return []
+        }
+        return sponsors
     }
     
     var committees: [Committee] {
-        print(cdCommittees)
-        return []
+        guard let committees = cdCommittees?.allObjects as? [Committee] else {
+            assertionFailure("Failed to unwrap the subjects")
+            return []
+        }
+        return committees
     }
     
     var name: String { cdName ?? "" }
@@ -29,5 +38,7 @@ extension CDBill: Bill {
     var session: String { cdSession ?? "" }
     
     var billID: String { cdBillID ?? "" }
+    
+    var dateIntroduced: Date { cdDateIntroduced ?? .distantPast }
     
 }

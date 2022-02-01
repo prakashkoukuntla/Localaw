@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1519" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDBill" representedClassName="CDBill" syncable="YES" codeGenerationType="class">
         <attribute name="cdBillID" optional="YES" attributeType="String"/>
+        <attribute name="cdDateIntroduced" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="cdLongSummary" optional="YES" attributeType="String"/>
         <attribute name="cdName" optional="YES" attributeType="String"/>
         <attribute name="cdSession" optional="YES" attributeType="String"/>
@@ -45,11 +46,11 @@
         <relationship name="cdCounty" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDCounty" inverseName="cdLegislators" inverseEntity="CDCounty"/>
     </entity>
     <elements>
-        <element name="CDBill" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="CDBill" positionX="-63" positionY="-18" width="128" height="164"/>
         <element name="CDBillCategory" positionX="-63" positionY="18" width="128" height="88"/>
-        <element name="CDLegislator" positionX="-54" positionY="36" width="128" height="178"/>
-        <element name="CDContact" positionX="-45" positionY="45" width="128" height="88"/>
         <element name="CDCommittee" positionX="-36" positionY="54" width="128" height="148"/>
+        <element name="CDContact" positionX="-45" positionY="45" width="128" height="88"/>
         <element name="CDCounty" positionX="-18" positionY="99" width="128" height="73"/>
+        <element name="CDLegislator" positionX="-54" positionY="36" width="128" height="178"/>
     </elements>
 </model>
