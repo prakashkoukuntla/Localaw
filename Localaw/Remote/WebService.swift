@@ -37,6 +37,27 @@ class WebService {
         var name: String
     }
     
+    struct Legislator: Codable {
+        var id: Int
+        var firstName: String
+        var lastName: String
+        var officialName: String
+        var party: String
+        var pictureUrl: String
+        var chamber: String
+        var email: String
+        var memberId: String
+        var counties: String //comma separated list
+        var leadershipPosition: String?
+        var committees: [LegislatorCommittee]
+        var district: Int
+    }
+    
+    struct LegislatorCommittee: Codable {
+        var name: String
+        var committeeUuid: String
+    }
+    
     func fetchBills() {
         guard let url = URL(string: "https://cogar.denvertech.org/api/v1/bills.json") else { return }
         let request = URLRequest(url: url)
@@ -56,6 +77,25 @@ class WebService {
         dataTask.resume()
     }
     func fetchLegislators() {
-        
+        guard let url = URL(string: "https://cogar.denvertech.org/api/v1/legislators.json") else { return }
+        let request = URLRequest(url: url)
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            guard let data = data else {
+                fatalError("no data")
+            }
+            print(data)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            do {
+                let legislators = try decoder.decode([Legislator].self, from: data)
+                print(legislators)
+            } catch let e as NSError {
+                print(e)
+            }
+        }
+        dataTask.resume()
     }
 }

@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("hello")
-        webservice.fetchBills()
+        //webservice.fetchBills()
+        webservice.fetchLegislators()
         print("bye")
         let bill = CDBill(context: database.context)
         bill.cdName = "name"
