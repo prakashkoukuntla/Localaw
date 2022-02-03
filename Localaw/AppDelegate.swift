@@ -9,9 +9,13 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let database = Database()
+    let webservice = WebService()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        print("hello")
+        webservice.fetchBills()
+        print("bye")
         let bill = CDBill(context: database.context)
         bill.cdName = "name"
         bill.cdSession = "session"

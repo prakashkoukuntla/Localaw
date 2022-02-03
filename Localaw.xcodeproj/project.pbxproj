@@ -16,6 +16,7 @@
 		073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C25BC27584763002B278A /* UIView+Extensions.swift */; };
 		073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */; };
 		073CDF26273F3BCB00CAD3EB /* County.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073CDF25273F3BCB00CAD3EB /* County.swift */; };
+		073F024827AB55C100759366 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F024727AB55C100759366 /* WebService.swift */; };
 		073F190327890D7D000EFBB0 /* TagViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F190227890D7D000EFBB0 /* TagViewLayout.swift */; };
 		07406699279B844E00F8BB98 /* BillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07406698279B844E00F8BB98 /* BillDetailViewController.swift */; };
 		07411BFD278675590020F233 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07411BFC278675590020F233 /* TagCell.swift */; };
@@ -69,6 +70,7 @@
 		073C25BC27584763002B278A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionViewController.swift; sourceTree = "<group>"; };
 		073CDF25273F3BCB00CAD3EB /* County.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = County.swift; sourceTree = "<group>"; };
+		073F024727AB55C100759366 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		073F190227890D7D000EFBB0 /* TagViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewLayout.swift; sourceTree = "<group>"; };
 		07406698279B844E00F8BB98 /* BillDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillDetailViewController.swift; sourceTree = "<group>"; };
 		07411BFC278675590020F233 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		073F024627AB557100759366 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				073F024727AB55C100759366 /* WebService.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
 		07411C01278675750020F233 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +213,7 @@
 		0782BDB2272CB64F001D12C8 /* Localaw */ = {
 			isa = PBXGroup;
 			children = (
+				073F024627AB557100759366 /* Remote */,
 				073CDF2A273F3FA300CAD3EB /* Model */,
 				07411C01278675750020F233 /* Cells */,
 				0782BDB3272CB64F001D12C8 /* AppDelegate.swift */,
@@ -488,6 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				073F024827AB55C100759366 /* WebService.swift in Sources */,
 				074401512735F5A60080FFD0 /* Legislator.swift in Sources */,
 				073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */,
 				073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */,
