@@ -19,11 +19,9 @@
 		073F190327890D7D000EFBB0 /* TagViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F190227890D7D000EFBB0 /* TagViewLayout.swift */; };
 		07406699279B844E00F8BB98 /* BillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07406698279B844E00F8BB98 /* BillDetailViewController.swift */; };
 		07411BFD278675590020F233 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07411BFC278675590020F233 /* TagCell.swift */; };
-		074401612735FD240080FFD0 /* CDBill+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401602735FD240080FFD0 /* CDBill+Extensions.swift */; };
 		0745AF4527335668000E3500 /* SavedBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0745AF4427335668000E3500 /* SavedBillsViewController.swift */; };
 		0745AF4A273356AF000E3500 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0745AF49273356AF000E3500 /* SettingsViewController.swift */; };
 		0745AF4F273359E5000E3500 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0745AF4E273359E5000E3500 /* Localizable.strings */; };
-		0745C8C0273C9AAC00683633 /* CDBillCategory+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0745C8BF273C9AAC00683633 /* CDBillCategory+Extensions.swift */; };
 		0782BDB4272CB64F001D12C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782BDB3272CB64F001D12C8 /* AppDelegate.swift */; };
 		0782BDB6272CB64F001D12C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782BDB5272CB64F001D12C8 /* SceneDelegate.swift */; };
 		0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782BDB7272CB650001D12C8 /* RecentBillsViewController.swift */; };
@@ -67,11 +65,9 @@
 		073F190227890D7D000EFBB0 /* TagViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewLayout.swift; sourceTree = "<group>"; };
 		07406698279B844E00F8BB98 /* BillDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillDetailViewController.swift; sourceTree = "<group>"; };
 		07411BFC278675590020F233 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
-		074401602735FD240080FFD0 /* CDBill+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDBill+Extensions.swift"; sourceTree = "<group>"; };
 		0745AF4427335668000E3500 /* SavedBillsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBillsViewController.swift; sourceTree = "<group>"; };
 		0745AF49273356AF000E3500 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0745AF4E273359E5000E3500 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		0745C8BF273C9AAC00683633 /* CDBillCategory+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDBillCategory+Extensions.swift"; sourceTree = "<group>"; };
 		0782BDB0272CB64F001D12C8 /* Localaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Localaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0782BDB3272CB64F001D12C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0782BDB5272CB64F001D12C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,8 +133,6 @@
 		073CDF2B273F3FC800CAD3EB /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				074401602735FD240080FFD0 /* CDBill+Extensions.swift */,
-				0745C8BF273C9AAC00683633 /* CDBillCategory+Extensions.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -481,8 +475,6 @@
 				0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */,
 				073C23272743365F009FC216 /* TextCell.swift in Sources */,
 				073C25B8275845B9002B278A /* CategorySelectionView.swift in Sources */,
-				074401612735FD240080FFD0 /* CDBill+Extensions.swift in Sources */,
-				0745C8C0273C9AAC00683633 /* CDBillCategory+Extensions.swift in Sources */,
 				0782BDB4272CB64F001D12C8 /* AppDelegate.swift in Sources */,
 				0782BDB6272CB64F001D12C8 /* SceneDelegate.swift in Sources */,
 				073F190327890D7D000EFBB0 /* TagViewLayout.swift in Sources */,

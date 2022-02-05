@@ -27,7 +27,7 @@ struct Sponsors: Hashable, Identifiable {
     }
 
     let id = UUID()
-    var sponsors: [Legislator]
+    var sponsors: [CDLegislator]
 }
 
 struct TitleElements: Hashable, Identifiable {
@@ -47,7 +47,7 @@ struct Categories: Hashable, Identifiable {
     }
 
     let id = UUID()
-    var categories: [BillCategory]
+    var categories: [CDBillCategory]
 }
 
 struct Committees: Hashable, Identifiable {
@@ -60,7 +60,7 @@ struct Committees: Hashable, Identifiable {
     }
 
     let id = UUID()
-    var sentateCommittees: [Committee]
+    var sentateCommittees: [CDCommittee]
 }
 
 struct SummaryItem: Hashable, Identifiable {

@@ -13,10 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        print("hello")
-        //webservice.fetchBills()
-        webservice.fetchLegislators()
-        print("bye")
+        webservice.fetchBills { result in
+            switch result {
+            case .success(let bills):
+                print(bills)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        //webservice.fetchLegislators()
+        //webservice.fetchCommittees()
         let bill = CDBill(context: database.context)
         bill.cdName = "name"
         bill.cdSession = "session"
