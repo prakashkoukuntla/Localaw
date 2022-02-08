@@ -124,17 +124,9 @@
 		073CDF2A273F3FA300CAD3EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				073CDF2B273F3FC800CAD3EB /* Core Data */,
 				035225FD27A4C397006A8DED /* Database.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		073CDF2B273F3FC800CAD3EB /* Core Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Core Data";
 			sourceTree = "<group>";
 		};
 		073F024627AB557100759366 /* Remote */ = {
