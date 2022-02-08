@@ -13,29 +13,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        webservice.fetchBills { result in
-            switch result {
-            case .success(let bills):
-                print(bills)
-            case .failure(let error):
-                print(error.localizedDescription)
+        webservice.fetchBills { [self] result in
+            database.context.perform {
+                switch result {
+                case .success(let bills):
+                    for bill in bills {
+                        let cdBill = CDBill(context: database.context)
+                        cdBill.billNum = bill.billNum
+                        cdBill.billStatus = bill.billStatus
+                        cdBill.category = bill.category
+                        //cdBill.committees = bill.committees
+                        cdBill.fullTopic = bill.fullTopic
+                        cdBill.info = bill.description
+                        cdBill.longTitle = bill.longTitle
+                        cdBill.originalChamber = bill.originalChamber
+                        cdBill.sessionTitle = bill.sessionTitle
+                        //cdBill.sponsors
+                        cdBill.title = bill.title
+                        cdBill.websiteLink = bill.websiteLink
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                database.saveContext()
             }
         }
         // webservice.fetchLegislators()
         // webservice.fetchCommittees()
-        let bill = CDBill(context: database.context)
-        bill.cdName = "name"
-        bill.cdSession = "session"
-        bill.cdDateIntroduced = Date()
-        let legislator = CDLegislator(context: database.context)
-        legislator.cdName = "first last"
-        legislator.cdEmail = "politicsstuff@colorado.co"
-        legislator.cdParty = "green"
-        legislator.addToCdBills(bill)
-        let county = CDCounty(context: database.context)
-        county.cdCounty = "big"
-        county.addToCdLegislators(legislator)
-        database.saveContext()
+
         return true
     }
 

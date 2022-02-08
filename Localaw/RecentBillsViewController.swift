@@ -30,7 +30,7 @@ class RecentBillsViewController: UIViewController {
         /// A fetch request is responsible for narrowing down which data to search the database for. The first
         /// filter is by entity type (in this case `CDBill`) and we can narrow it further with a predicate.
         let fetchRequest: NSFetchRequest<CDBill> = CDBill.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "cdDateIntroduced", ascending: true)]
+        fetchRequest.sortDescriptors = [.init(keyPath: \CDBill.billNum, ascending: true)]
         let controller = NSFetchedResultsController<CDBill>(fetchRequest: fetchRequest,
                                                             managedObjectContext: context,
                                                             sectionNameKeyPath: nil,
@@ -124,7 +124,7 @@ extension RecentBillsViewController: UITableViewDataSource {
         let bill = fetchedResultsController.object(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
         if let cell = cell as? TextCell {
-            cell.textLabel?.text = bill.cdName
+            cell.textLabel?.text = bill.title
         }
         return cell
     }

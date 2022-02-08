@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1519" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDBill" representedClassName="CDBill" syncable="YES" codeGenerationType="class">
-        <attribute name="cdBillID" optional="YES" attributeType="String"/>
-        <attribute name="cdDateIntroduced" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="cdLongSummary" optional="YES" attributeType="String"/>
-        <attribute name="cdName" optional="YES" attributeType="String"/>
-        <attribute name="cdSession" optional="YES" attributeType="String"/>
-        <attribute name="cdShortSummary" optional="YES" attributeType="String"/>
-        <relationship name="cdCommittees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDCommittee" inverseName="cdBills" inverseEntity="CDCommittee"/>
-        <relationship name="cdSponsors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDLegislator" inverseName="cdBills" inverseEntity="CDLegislator"/>
-        <relationship name="cdSubjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBillCategory" inverseName="cdBills" inverseEntity="CDBillCategory"/>
+        <attribute name="billNum" optional="YES" attributeType="String"/>
+        <attribute name="billStatus" optional="YES" attributeType="String"/>
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="fullTopic" optional="YES" attributeType="String"/>
+        <attribute name="info" optional="YES" attributeType="String"/>
+        <attribute name="longTitle" optional="YES" attributeType="String"/>
+        <attribute name="originalChamber" optional="YES" attributeType="String"/>
+        <attribute name="sessionTitle" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="websiteLink" optional="YES" attributeType="String"/>
+        <relationship name="committees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDCommittee" inverseName="cdBills" inverseEntity="CDCommittee"/>
+        <relationship name="sponsors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDLegislator" inverseName="cdBills" inverseEntity="CDLegislator"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="billNum"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="CDBillCategory" representedClassName="CDBillCategory" syncable="YES" codeGenerationType="class">
         <attribute name="cdIcon" optional="YES" attributeType="Binary"/>
         <attribute name="cdName" optional="YES" attributeType="String"/>
-        <relationship name="cdBills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="cdSubjects" inverseEntity="CDBill"/>
     </entity>
     <entity name="CDCommittee" representedClassName="CDCommittee" syncable="YES" codeGenerationType="class">
         <attribute name="cdEmail" optional="YES" attributeType="String"/>
         <attribute name="cdName" optional="YES" attributeType="String"/>
         <attribute name="cdSummary" optional="YES" attributeType="String"/>
         <attribute name="cdType" optional="YES" attributeType="String"/>
-        <relationship name="cdBills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="cdCommittees" inverseEntity="CDBill"/>
+        <relationship name="cdBills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="committees" inverseEntity="CDBill"/>
         <relationship name="cdContacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDContact" inverseName="cdCommittee" inverseEntity="CDContact"/>
         <relationship name="cdMembers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDLegislator" inverseName="cdCommitteeAssignments" inverseEntity="CDLegislator"/>
     </entity>
@@ -34,6 +41,11 @@
         <attribute name="cdCounty" optional="YES" attributeType="String"/>
         <relationship name="cdLegislators" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDLegislator" inverseName="cdCounty" inverseEntity="CDLegislator"/>
     </entity>
+    <entity name="CDHistory" representedClassName="CDHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="action" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="CDLegislator" representedClassName="CDLegislator" syncable="YES" codeGenerationType="class">
         <attribute name="cdDistrict" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="cdEmail" optional="YES" attributeType="String"/>
@@ -41,16 +53,17 @@
         <attribute name="cdName" optional="YES" attributeType="String"/>
         <attribute name="cdParty" optional="YES" attributeType="String"/>
         <attribute name="cdProfilePicture" optional="YES" attributeType="Binary"/>
-        <relationship name="cdBills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="cdSponsors" inverseEntity="CDBill"/>
+        <relationship name="cdBills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="sponsors" inverseEntity="CDBill"/>
         <relationship name="cdCommitteeAssignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDCommittee" inverseName="cdMembers" inverseEntity="CDCommittee"/>
         <relationship name="cdCounty" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDCounty" inverseName="cdLegislators" inverseEntity="CDCounty"/>
     </entity>
     <elements>
-        <element name="CDBill" positionX="-63" positionY="-18" width="128" height="164"/>
-        <element name="CDBillCategory" positionX="-63" positionY="18" width="128" height="88"/>
+        <element name="CDBill" positionX="-63" positionY="-18" width="128" height="223"/>
+        <element name="CDBillCategory" positionX="-63" positionY="18" width="128" height="73"/>
         <element name="CDCommittee" positionX="-36" positionY="54" width="128" height="148"/>
         <element name="CDContact" positionX="-45" positionY="45" width="128" height="88"/>
         <element name="CDCounty" positionX="-18" positionY="99" width="128" height="73"/>
         <element name="CDLegislator" positionX="-54" positionY="36" width="128" height="178"/>
+        <element name="CDHistory" positionX="-45" positionY="81" width="128" height="88"/>
     </elements>
 </model>
