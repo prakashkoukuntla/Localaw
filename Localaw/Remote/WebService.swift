@@ -12,7 +12,7 @@ enum Result<Success, Failure: LocalizedError> {
 enum WebServiceError: Error, LocalizedError {
     case noData
     case error(Error)
-    
+
     var errorDescription: String? {
         switch self {
         case .noData:
@@ -39,13 +39,13 @@ class WebService {
         var committees: [Committee]
         var summarizedHistory: [History]
     }
-    
+
     struct History: Codable {
         var location: String
         var action: String
-        var date: String //YYYY-MM-DD
+        var date: String // YYYY-MM-DD
     }
-    
+
     struct Sponsor: Codable {
         var id: Int
         var name: String
@@ -55,14 +55,14 @@ class WebService {
         var avatar: String?
         var counties: String? // comma separated list of names
     }
-    
+
     struct Committee: Codable {
         var id: Int
         var uuid: String
         var chamber: String
         var name: String
     }
-    
+
     struct Legislator: Codable {
         var id: Int
         var firstName: String
@@ -73,17 +73,17 @@ class WebService {
         var chamber: String
         var email: String
         var memberId: String
-        var counties: String //comma separated list
+        var counties: String // comma separated list
         var leadershipPosition: String?
         var committees: [LegislatorCommittee]
         var district: Int
     }
-    
+
     struct LegislatorCommittee: Codable {
         var name: String
         var committeeUuid: String
     }
-    
+
     struct BaseCommittee: Codable {
         var id: Int
         var uuid: String
@@ -94,7 +94,7 @@ class WebService {
         var committeeType: String
         var committeeMembers: [CommitteeMember]
     }
-    
+
     struct CommitteeMember: Codable {
         var id: Int
         var memberId: String
@@ -104,11 +104,11 @@ class WebService {
         var email: String
         var phone: String
     }
-    
+
     func fetchBills(completion: @escaping (Result<[Bill], WebServiceError>) -> Void) {
         guard let url = URL(string: "https://cogar.denvertech.org/api/v1/bills.json") else { return }
         let request = URLRequest(url: url)
-        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
                 completion(.failure(.error(error)))
                 return
@@ -128,11 +128,11 @@ class WebService {
         }
         dataTask.resume()
     }
-    
+
     func fetchLegislators() {
         guard let url = URL(string: "https://cogar.denvertech.org/api/v1/legislators.json") else { return }
         let request = URLRequest(url: url)
-        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
@@ -145,17 +145,17 @@ class WebService {
             do {
                 let legislators = try decoder.decode([Legislator].self, from: data)
                 print(legislators)
-            } catch let e as NSError {
-                print(e)
+            } catch let err as NSError {
+                print(err)
             }
         }
         dataTask.resume()
     }
-    
+
     func fetchCommittees() {
         guard let url = URL(string: "https://cogar.denvertech.org/api/v1/committees.json") else { return }
         let request = URLRequest(url: url)
-        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
@@ -168,8 +168,8 @@ class WebService {
             do {
                 let committees = try decoder.decode([BaseCommittee].self, from: data)
                 print(committees)
-            } catch let e as NSError {
-                print(e)
+            } catch let err as NSError {
+                print(err)
             }
         }
         dataTask.resume()

@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
             }
         }
-        //webservice.fetchLegislators()
-        //webservice.fetchCommittees()
+        // webservice.fetchLegislators()
+        // webservice.fetchCommittees()
         let bill = CDBill(context: database.context)
         bill.cdName = "name"
         bill.cdSession = "session"
