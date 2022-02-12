@@ -11,7 +11,7 @@ class RecentBillsViewController: UIViewController {
     // MARK: - Variables
 
     lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
@@ -126,10 +126,19 @@ extension RecentBillsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let bill = fetchedResultsController.object(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-        if let cell = cell as? TextCell {
-            cell.textLabel?.text = bill.title
-            cell.accessoryType = .disclosureIndicator
-        }
+        
+        var configuration = UIListContentConfiguration.subtitleCell()
+        configuration.text = bill.title
+        configuration.secondaryText = bill.longTitle
+        
+        cell.accessoryType = .disclosureIndicator
+        cell.contentConfiguration = configuration
+//        let accessory = UIView()
+//        accessory.backgroundColor = .yellow
+//        if .random() {
+//            cell.accessoryView = accessory
+//        }
+        
         return cell
     }
 }
