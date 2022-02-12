@@ -4,6 +4,7 @@
 
 import UIKit
 import CoreData
+import WebKit
 
 class RecentBillsViewController: UIViewController {
 
@@ -99,8 +100,10 @@ class RecentBillsViewController: UIViewController {
 extension RecentBillsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = BillDetailViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        guard let bill = fetchedResultsController.fetchedObjects?[indexPath.row] else { return }
+        guard let websiteLink = bill.websiteLink else { return }
+        let webViewController = WebViewController(url: websiteLink)
+        navigationController?.pushViewController(webViewController, animated: true)
     }
 }
 
@@ -125,6 +128,7 @@ extension RecentBillsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
         if let cell = cell as? TextCell {
             cell.textLabel?.text = bill.title
+            cell.accessoryType = .disclosureIndicator
         }
         return cell
     }
