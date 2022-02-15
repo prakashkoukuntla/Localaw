@@ -21,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let cdBill = CDBill(context: database.context)
                         cdBill.billNum = bill.billNum
                         cdBill.billStatus = bill.billStatus
-                        cdBill.category = bill.category
+                        let billCategory = CDBillCategory(context: database.context)
+                        billCategory.cdName = bill.category
+                        cdBill.category = billCategory
                         // cdBill.committees = bill.committees
                         cdBill.fullTopic = bill.fullTopic
                         cdBill.info = bill.description
@@ -35,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
+                NotificationCenter.default.post(name: .billsUpdated, object: nil)
                 database.saveContext()
             }
         }
@@ -57,4 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+}
+
+extension Notification.Name {
+    static let billsUpdated = Notification.Name(rawValue: "Bills Updated")
 }
