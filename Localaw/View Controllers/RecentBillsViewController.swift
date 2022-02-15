@@ -4,13 +4,14 @@
 
 import UIKit
 import CoreData
+import WebKit
 
 class RecentBillsViewController: UIViewController {
 
     // MARK: - Variables
 
     lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
@@ -99,8 +100,10 @@ class RecentBillsViewController: UIViewController {
 extension RecentBillsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = BillDetailViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        guard let bill = fetchedResultsController.fetchedObjects?[indexPath.row] else { return }
+        guard let websiteLink = bill.websiteLink else { return }
+        let webViewController = WebViewController(url: websiteLink)
+        navigationController?.pushViewController(webViewController, animated: true)
     }
 }
 
@@ -123,9 +126,19 @@ extension RecentBillsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let bill = fetchedResultsController.object(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-        if let cell = cell as? TextCell {
-            cell.textLabel?.text = bill.title
-        }
+        
+        var configuration = UIListContentConfiguration.subtitleCell()
+        configuration.text = bill.title
+        configuration.secondaryText = bill.longTitle
+        
+        cell.accessoryType = .disclosureIndicator
+        cell.contentConfiguration = configuration
+//        let accessory = UIView()
+//        accessory.backgroundColor = .yellow
+//        if .random() {
+//            cell.accessoryView = accessory
+//        }
+        
         return cell
     }
 }

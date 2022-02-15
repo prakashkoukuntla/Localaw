@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031830F827B73517007A94C3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031830F727B73517007A94C3 /* WebViewController.swift */; };
 		035225FE27A4C397006A8DED /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035225FD27A4C397006A8DED /* Database.swift */; };
 		073B37E12792494800896EF5 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073B37E02792494800896EF5 /* SpacerView.swift */; };
 		073C231D2743363B009FC216 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C231C2743363B009FC216 /* TextFieldCell.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		031830F727B73517007A94C3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		035225FD27A4C397006A8DED /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		073B37E02792494800896EF5 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		073C231C2743363B009FC216 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
@@ -121,6 +123,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031830F627B73507007A94C3 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				07406698279B844E00F8BB98 /* BillDetailViewController.swift */,
+				0782BDB7272CB650001D12C8 /* RecentBillsViewController.swift */,
+				0745AF4427335668000E3500 /* SavedBillsViewController.swift */,
+				0745AF49273356AF000E3500 /* SettingsViewController.swift */,
+				073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */,
+				031830F727B73517007A94C3 /* WebViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		073CDF2A273F3FA300CAD3EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,11 +193,7 @@
 				07411C01278675750020F233 /* Cells */,
 				0782BDB3272CB64F001D12C8 /* AppDelegate.swift */,
 				0782BDB5272CB64F001D12C8 /* SceneDelegate.swift */,
-				07406698279B844E00F8BB98 /* BillDetailViewController.swift */,
-				0782BDB7272CB650001D12C8 /* RecentBillsViewController.swift */,
-				0745AF4427335668000E3500 /* SavedBillsViewController.swift */,
-				0745AF49273356AF000E3500 /* SettingsViewController.swift */,
-				073C900D2755A62B0039A1BC /* CategorySelectionViewController.swift */,
+				031830F627B73507007A94C3 /* View Controllers */,
 				073B37E02792494800896EF5 /* SpacerView.swift */,
 				073C25B7275845B9002B278A /* CategorySelectionView.swift */,
 				073F190227890D7D000EFBB0 /* TagViewLayout.swift */,
@@ -459,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				031830F827B73517007A94C3 /* WebViewController.swift in Sources */,
 				073F024827AB55C100759366 /* WebService.swift in Sources */,
 				073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */,
 				073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */,

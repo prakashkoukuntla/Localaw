@@ -22,13 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         cdBill.billNum = bill.billNum
                         cdBill.billStatus = bill.billStatus
                         cdBill.category = bill.category
-                        //cdBill.committees = bill.committees
+                        // cdBill.committees = bill.committees
                         cdBill.fullTopic = bill.fullTopic
                         cdBill.info = bill.description
                         cdBill.longTitle = bill.longTitle
                         cdBill.originalChamber = bill.originalChamber
                         cdBill.sessionTitle = bill.sessionTitle
-                        //cdBill.sponsors
+                        // cdBill.sponsors
                         cdBill.title = bill.title
                         cdBill.websiteLink = bill.websiteLink
                     }
