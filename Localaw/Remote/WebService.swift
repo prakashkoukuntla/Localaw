@@ -50,6 +50,7 @@ class WebService {
         var id: Int
         var name: String
         var chamber: String
+        var memberId: String
         var email: String?
         var district: Int?
         var avatar: String?
