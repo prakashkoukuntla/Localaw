@@ -123,7 +123,7 @@ class CategorySelectionViewController: UIViewController {
 extension CategorySelectionViewController: CategorySelectionDelegate {
     func allCategories() -> [CDBillCategory] {
         let fetchRequest: NSFetchRequest<CDBillCategory> = CDBillCategory.fetchRequest()
-        return try! database.context.fetch(fetchRequest)
+        return (try? database.context.fetch(fetchRequest)) ?? []
     }
     
     func numberOfSelectedCategoriesChanged(to number: Int) {

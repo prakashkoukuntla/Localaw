@@ -10,7 +10,7 @@
         <attribute name="sessionTitle" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="websiteLink" optional="YES" attributeType="String"/>
-        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBillCategory" inverseName="bills" inverseEntity="CDBillCategory"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBillCategory" inverseName="bills" inverseEntity="CDBillCategory"/>
         <relationship name="committees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDCommittee" inverseName="bills" inverseEntity="CDCommittee"/>
         <relationship name="sponsors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDLegislator" inverseName="bills" inverseEntity="CDLegislator"/>
         <relationship name="summarizedHistory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDHistory" inverseName="bill" inverseEntity="CDHistory"/>
@@ -22,7 +22,7 @@
     </entity>
     <entity name="CDBillCategory" representedClassName="CDBillCategory" syncable="YES" codeGenerationType="class">
         <attribute name="cdName" optional="YES" attributeType="String"/>
-        <relationship name="bills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="categories" inverseEntity="CDBill"/>
+        <relationship name="bills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="category" inverseEntity="CDBill"/>
     </entity>
     <entity name="CDCommittee" representedClassName="CDCommittee" syncable="YES" codeGenerationType="class">
         <attribute name="chamber" optional="YES" attributeType="String"/>
