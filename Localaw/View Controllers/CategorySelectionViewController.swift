@@ -4,14 +4,18 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class CategorySelectionViewController: UIViewController {
     lazy var numberSelectedLabel = makeNumberSelectedLabel()
     var categorySelectionView = CategorySelectionView()
-
-    init() {
+    let database: Database
+    
+    init(database: Database) {
+        self.database = database
         super.init(nibName: nil, bundle: nil)
         categorySelectionView.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(handleBillsUpdated(_:)), name: .billsUpdated, object: nil)
     }
 
     required init?(coder: NSCoder) {
@@ -109,10 +113,19 @@ class CategorySelectionViewController: UIViewController {
         label.numberOfLines = 0
         return label
     }
+    
+    @objc func handleBillsUpdated(_ notification: Notification) {
+        categorySelectionView.applyInitialSnapshot()
+    }
 
 }
 
 extension CategorySelectionViewController: CategorySelectionDelegate {
+    func allCategories() -> [CDBillCategory] {
+        let fetchRequest: NSFetchRequest<CDBillCategory> = CDBillCategory.fetchRequest()
+        return try! database.context.fetch(fetchRequest)
+    }
+    
     func numberOfSelectedCategoriesChanged(to number: Int) {
         numberSelectedLabel.text = makeNumberSelectedLabelText(number: number)
     }

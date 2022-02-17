@@ -55,7 +55,7 @@ extension SceneDelegate {
     func showBillCategoriesModalIfNeeded() {
         UserDefaults.standard.set(true, forKey: "wasLaunched")
         guard let _ = UserDefaults.standard.array(forKey: "selectedCategories") else {
-            let controller = CategorySelectionViewController()
+            let controller = CategorySelectionViewController(database: database)
             tabBar.present(controller, animated: true, completion: nil)
             return
         }

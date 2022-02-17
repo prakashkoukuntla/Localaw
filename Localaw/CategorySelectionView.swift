@@ -4,9 +4,11 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 protocol CategorySelectionDelegate: AnyObject {
     func numberOfSelectedCategoriesChanged(to number: Int)
+    func allCategories() -> [CDBillCategory]
 }
 
 class CategorySelectionView: UIView {
@@ -72,9 +74,14 @@ class CategorySelectionView: UIView {
     }
 
     func applyInitialSnapshot() {
+        guard let categories = delegate?.allCategories() else { return }
+        let categoryStrings = categories.compactMap {
+            $0.cdName
+        }
+        let uniqueCategoryStrings = Array(Set(categoryStrings))
         var initialSnapshot = NSDiffableDataSourceSnapshot<Int, String>()
         initialSnapshot.appendSections([0])
-        initialSnapshot.appendItems(["Roads", "Cars", "Schools", "Other Laws", "More Stuff", "Trucks", "Buses", "Laptops", "Computers", "Cows", "Pigs", "Sheep"])
+        initialSnapshot.appendItems(uniqueCategoryStrings)
         // dataSource.apply(initialSnapshot)
 
         dataSource.apply(initialSnapshot, animatingDifferences: false, completion: nil)
