@@ -3,7 +3,6 @@
     <entity name="CDBill" representedClassName="CDBill" syncable="YES" codeGenerationType="class">
         <attribute name="billNum" optional="YES" attributeType="String"/>
         <attribute name="billStatus" optional="YES" attributeType="String"/>
-        <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="fullTopic" optional="YES" attributeType="String"/>
         <attribute name="info" optional="YES" attributeType="String"/>
         <attribute name="longTitle" optional="YES" attributeType="String"/>
@@ -11,6 +10,7 @@
         <attribute name="sessionTitle" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="websiteLink" optional="YES" attributeType="String"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBillCategory" inverseName="bills" inverseEntity="CDBillCategory"/>
         <relationship name="committees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDCommittee" inverseName="bills" inverseEntity="CDCommittee"/>
         <relationship name="sponsors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDLegislator" inverseName="bills" inverseEntity="CDLegislator"/>
         <relationship name="summarizedHistory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDHistory" inverseName="bill" inverseEntity="CDHistory"/>
@@ -22,6 +22,7 @@
     </entity>
     <entity name="CDBillCategory" representedClassName="CDBillCategory" syncable="YES" codeGenerationType="class">
         <attribute name="cdName" optional="YES" attributeType="String"/>
+        <relationship name="bills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBill" inverseName="categories" inverseEntity="CDBill"/>
     </entity>
     <entity name="CDCommittee" representedClassName="CDCommittee" syncable="YES" codeGenerationType="class">
         <attribute name="chamber" optional="YES" attributeType="String"/>
@@ -69,7 +70,7 @@
     </entity>
     <elements>
         <element name="CDBill" positionX="-63" positionY="-18" width="128" height="224"/>
-        <element name="CDBillCategory" positionX="-63" positionY="18" width="128" height="58"/>
+        <element name="CDBillCategory" positionX="-63" positionY="18" width="128" height="59"/>
         <element name="CDCommittee" positionX="-36" positionY="54" width="128" height="193"/>
         <element name="CDCommitteeMember" positionX="-36" positionY="117" width="128" height="163"/>
         <element name="CDHistory" positionX="-45" positionY="81" width="128" height="103"/>
