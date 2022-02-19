@@ -9,10 +9,10 @@ import CoreData
 class CategorySelectionViewController: UIViewController {
     lazy var numberSelectedLabel = makeNumberSelectedLabel()
     var categorySelectionView = CategorySelectionView()
-    let database: Database
-    
-    init(database: Database) {
-        self.database = database
+    weak var context: NSManagedObjectContext?
+
+    init(context: NSManagedObjectContext) {
+        self.context = context
         super.init(nibName: nil, bundle: nil)
         categorySelectionView.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(handleBillsUpdated(_:)), name: .billsUpdated, object: nil)
@@ -29,10 +29,15 @@ class CategorySelectionViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = 10
-        stackView.addArrangedSubview(makeWelcomeLabel())
-        stackView.addArrangedSubview(makeColoradoLabel())
-        stackView.addArrangedSubview(makeLogoImageView())
-        stackView.addArrangedSubview(makeDescriptionLabel())
+        if UserDefaults.standard.array(forKey: "selectedCategories") == nil {
+            stackView.addArrangedSubview(makeWelcomeLabel())
+            stackView.addArrangedSubview(makeColoradoLabel())
+            stackView.addArrangedSubview(makeLogoImageView())
+            stackView.addArrangedSubview(makeDescriptionLabel())
+        }
+        else {
+            stackView.addArrangedSubview(SpacerView(height: 40))
+        }
         stackView.addArrangedSubview(categorySelectionView)
         stackView.addArrangedSubview(numberSelectedLabel)
         stackView.addArrangedSubview(SpacerView())
@@ -57,6 +62,7 @@ class CategorySelectionViewController: UIViewController {
 
     func makeContinueButton() -> UIButton {
         let button = UIButton()
+        button.backgroundColor = .legalPurple
         button.setTitle("Continue", for: .normal)
         button.addAction(.init(handler: { [weak self] _ in
             guard let self = self else { return }
@@ -65,7 +71,6 @@ class CategorySelectionViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .purple
         button.layer.borderColor = UIColor.clear.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 8
@@ -93,13 +98,13 @@ class CategorySelectionViewController: UIViewController {
 
     func makeColoradoLabel() -> UILabel {
         let label = UILabel()
-        label.text = "Colorado"
+        label.text = "Localaw"
         return label
     }
 
     func makeLogoImageView() -> UIImageView {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo")
+        imageView.image = UIImage(named: "InvertedLogo")
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 100),
             imageView.widthAnchor.constraint(equalToConstant: 100)
@@ -123,7 +128,7 @@ class CategorySelectionViewController: UIViewController {
 extension CategorySelectionViewController: CategorySelectionDelegate {
     func allCategories() -> [CDBillCategory] {
         let fetchRequest: NSFetchRequest<CDBillCategory> = CDBillCategory.fetchRequest()
-        return (try? database.context.fetch(fetchRequest)) ?? []
+        return (try? context?.fetch(fetchRequest)) ?? []
     }
     
     func numberOfSelectedCategoriesChanged(to number: Int) {

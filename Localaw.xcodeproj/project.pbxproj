@@ -31,6 +31,7 @@
 		0782BDC3272CB651001D12C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0782BDC1272CB651001D12C8 /* LaunchScreen.storyboard */; };
 		0782BDCE272CB652001D12C8 /* LocalawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782BDCD272CB652001D12C8 /* LocalawTests.swift */; };
 		0782BDD9272CB652001D12C8 /* LocalawUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782BDD8272CB652001D12C8 /* LocalawUITests.swift */; };
+		07D11AA927C073050007B6E8 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D11AA827C073050007B6E8 /* UIColor+Extensions.swift */; };
 		2EBE153EBB51427C69793E73 /* Pods_LocalawTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD308A1CB191C56AD5D4E79 /* Pods_LocalawTests.framework */; };
 		589A9DA1DF39A9AD4491DDB0 /* Pods_Localaw_LocalawUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B138849DABBC09047F934381 /* Pods_Localaw_LocalawUITests.framework */; };
 		71A717866DF9AC40DD0777F3 /* Pods_Localaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1363C94FE2F93CF68F2DD69F /* Pods_Localaw.framework */; };
@@ -84,6 +85,7 @@
 		0782BDD4272CB652001D12C8 /* LocalawUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalawUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0782BDD8272CB652001D12C8 /* LocalawUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalawUITests.swift; sourceTree = "<group>"; };
 		0782BDDA272CB652001D12C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07D11AA827C073050007B6E8 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		1363C94FE2F93CF68F2DD69F /* Pods_Localaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Localaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F5AF02FDF1056DD36A6320 /* Pods-Localaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Localaw.debug.xcconfig"; path = "Target Support Files/Pods-Localaw/Pods-Localaw.debug.xcconfig"; sourceTree = "<group>"; };
 		4D4D07CE378E0125A0EC1506 /* Pods-LocalawTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalawTests.release.xcconfig"; path = "Target Support Files/Pods-LocalawTests/Pods-LocalawTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -193,11 +195,11 @@
 				07411C01278675750020F233 /* Cells */,
 				0782BDB3272CB64F001D12C8 /* AppDelegate.swift */,
 				0782BDB5272CB64F001D12C8 /* SceneDelegate.swift */,
+				07D11AAD27C074360007B6E8 /* Extensions */,
 				031830F627B73507007A94C3 /* View Controllers */,
 				073B37E02792494800896EF5 /* SpacerView.swift */,
 				073C25B7275845B9002B278A /* CategorySelectionView.swift */,
 				073F190227890D7D000EFBB0 /* TagViewLayout.swift */,
-				073C25BC27584763002B278A /* UIView+Extensions.swift */,
 				0782BDBF272CB651001D12C8 /* Assets.xcassets */,
 				0782BDC1272CB651001D12C8 /* LaunchScreen.storyboard */,
 				0782BDC4272CB651001D12C8 /* Info.plist */,
@@ -223,6 +225,15 @@
 				0782BDDA272CB652001D12C8 /* Info.plist */,
 			);
 			path = LocalawUITests;
+			sourceTree = "<group>";
+		};
+		07D11AAD27C074360007B6E8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				07D11AA827C073050007B6E8 /* UIColor+Extensions.swift */,
+				073C25BC27584763002B278A /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		66E9C22FEBABDC4D282B8CDE /* Pods */ = {
@@ -481,6 +492,7 @@
 				073C25B8275845B9002B278A /* CategorySelectionView.swift in Sources */,
 				0782BDB4272CB64F001D12C8 /* AppDelegate.swift in Sources */,
 				0782BDB6272CB64F001D12C8 /* SceneDelegate.swift in Sources */,
+				07D11AA927C073050007B6E8 /* UIColor+Extensions.swift in Sources */,
 				073F190327890D7D000EFBB0 /* TagViewLayout.swift in Sources */,
 				0745AF4527335668000E3500 /* SavedBillsViewController.swift in Sources */,
 				07406699279B844E00F8BB98 /* BillDetailViewController.swift in Sources */,

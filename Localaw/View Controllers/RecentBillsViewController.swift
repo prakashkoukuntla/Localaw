@@ -84,16 +84,20 @@ class RecentBillsViewController: UIViewController {
     private func configureNavigationController() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage.init(systemName: "line.3.horizontal.decrease"),
+            image: UIImage(named: "Filter"),
             style: .plain,
             target: self,
             action: #selector(isClicked(_:)))
+        navigationItem.rightBarButtonItem?.tintColor = .legalPurple
     }
 
     // MARK: - Actions
 
     @objc func isClicked(_ item: UIBarButtonItem) {
-        print("Filter")
+        guard let context = context else { return }
+        let categorySelectionViewController = CategorySelectionViewController(context: context)
+        present(categorySelectionViewController, animated: true, completion: nil)
+        //print("Filter")
     }
 }
 

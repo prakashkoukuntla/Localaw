@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     lazy var tabBar: UITabBarController = {
         let tabBar = UITabBarController()
+        tabBar.tabBar.tintColor = .legalPurple
         tabBar.viewControllers = [
             makeRecentBillsViewController(context: database.context),
             makeSavedBillsViewController(),
@@ -55,7 +56,7 @@ extension SceneDelegate {
     func showBillCategoriesModalIfNeeded() {
         UserDefaults.standard.set(true, forKey: "wasLaunched")
         guard let _ = UserDefaults.standard.array(forKey: "selectedCategories") else {
-            let controller = CategorySelectionViewController(database: database)
+            let controller = CategorySelectionViewController(context: database.context)
             tabBar.present(controller, animated: true, completion: nil)
             return
         }

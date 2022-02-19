@@ -6,8 +6,11 @@ import Foundation
 import UIKit
 
 class SpacerView: UIView {
-    init() {
+    init(height: CGFloat? = nil) {
         super.init(frame: .zero)
+        if let height = height {
+            frame.size.height = height
+        }
         setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setContentHuggingPriority(.defaultLow, for: .horizontal)
