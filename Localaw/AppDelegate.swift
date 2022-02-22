@@ -10,7 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let database = Database()
     let webservice = WebService()
-
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        self.database.clear()
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         webservice.fetchBills { [self] result in
@@ -38,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print(error.localizedDescription)
                 }
                 NotificationCenter.default.post(name: .billsUpdated, object: nil)
+                
                 database.saveContext()
             }
         }
