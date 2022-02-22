@@ -107,7 +107,6 @@ class RecentBillsViewController: UIViewController {
         guard let context = context else { return }
         let categorySelectionViewController = CategorySelectionViewController(context: context)
         present(categorySelectionViewController, animated: true, completion: nil)
-        //print("Filter")
     }
 }
 
@@ -120,42 +119,6 @@ extension RecentBillsViewController: UITableViewDelegate {
         navigationController?.pushViewController(webViewController, animated: true)
     }
 }
-
-//extension RecentBillsViewController: UITableViewDataSource {
-
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        fetchedResultsController.sections?.count ?? 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        guard let sections = fetchedResultsController.sections else { return nil }
-//        return sections[section].indexTitle ?? ""
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        guard let sections = fetchedResultsController.sections else { return 0 }
-//        return sections[section].numberOfObjects
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let bill = fetchedResultsController.object(at: indexPath)
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-//
-//        var configuration = UIListContentConfiguration.subtitleCell()
-//        configuration.text = bill.title
-//        configuration.secondaryText = bill.longTitle
-//
-//        cell.accessoryType = .disclosureIndicator
-//        cell.contentConfiguration = configuration
-////        let accessory = UIView()
-////        accessory.backgroundColor = .yellow
-////        if .random() {
-////            cell.accessoryView = accessory
-////        }
-//
-//        return cell
-//    }
-//}
 
 extension RecentBillsViewController: NSFetchedResultsControllerDelegate {
     
