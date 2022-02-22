@@ -9,15 +9,24 @@ import WebKit
 class RecentBillsViewController: UIViewController {
 
     // MARK: - Variables
+    
+    lazy var dataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID> = {
+        .init(tableView: tableView) { tableView, indexPath, id in
+            let bill = self.fetchedResultsController.object(at: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
+            
+            var configuration = UIListContentConfiguration.subtitleCell()
+            configuration.text = bill.title
+            configuration.secondaryText = bill.longTitle
+            
+            cell.accessoryType = .disclosureIndicator
+            cell.contentConfiguration = configuration
 
-    lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
-        return tableView
+            return cell
+        }
     }()
-
+    
+    var tableView: UITableView
     weak var context: NSManagedObjectContext?
 
     /// The `fetchedResultsController` is an object that listens to changes in the CoreData managed
@@ -44,8 +53,13 @@ class RecentBillsViewController: UIViewController {
 
     init(context: NSManagedObjectContext) {
         self.context = context
+        self.tableView = UITableView(frame: .zero, style: .insetGrouped)
 
         super.init(nibName: nil, bundle: nil)
+        
+        tableView.delegate = self
+        tableView.dataSource = dataSource
+        tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
 
         tabBarItem.image = UIImage(systemName: "envelope.fill")
         tabBarItem.title = NSLocalizedString("recent_bills", comment: "")
@@ -59,10 +73,6 @@ class RecentBillsViewController: UIViewController {
     // MARK: - View lifecycle
 
     override func loadView() {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
         view = tableView
     }
 
@@ -97,7 +107,6 @@ class RecentBillsViewController: UIViewController {
         guard let context = context else { return }
         let categorySelectionViewController = CategorySelectionViewController(context: context)
         present(categorySelectionViewController, animated: true, completion: nil)
-        //print("Filter")
     }
 }
 
@@ -111,68 +120,9 @@ extension RecentBillsViewController: UITableViewDelegate {
     }
 }
 
-extension RecentBillsViewController: UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        fetchedResultsController.sections?.count ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let sections = fetchedResultsController.sections else { return nil }
-        return sections[section].indexTitle ?? ""
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchedResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let bill = fetchedResultsController.object(at: indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-        
-        var configuration = UIListContentConfiguration.subtitleCell()
-        configuration.text = bill.title
-        configuration.secondaryText = bill.longTitle
-        
-        cell.accessoryType = .disclosureIndicator
-        cell.contentConfiguration = configuration
-//        let accessory = UIView()
-//        accessory.backgroundColor = .yellow
-//        if .random() {
-//            cell.accessoryView = accessory
-//        }
-        
-        return cell
-    }
-}
-
 extension RecentBillsViewController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            guard let newIndexPath = newIndexPath else { return }
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-        case .delete:
-            guard let indexPath = indexPath else { return }
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        case .move:
-            guard let indexPath = indexPath else { return }
-            guard let newIndexPath = newIndexPath else { return }
-            tableView.moveRow(at: indexPath, to: newIndexPath)
-        case .update:
-            guard let newIndexPath = newIndexPath else { return }
-            tableView.reloadRows(at: [newIndexPath], with: .automatic)
-        @unknown default:
-            assertionFailure("Failed to handle an unknown default: \(type)")
-        }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+        dataSource.apply(snapshot as NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>)
     }
 }
