@@ -37,9 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                NotificationCenter.default.post(name: .billsUpdated, object: nil)
-                
+
                 database.saveContext()
+                NotificationCenter.default.post(name: .billsUpdated, object: nil)
             }
         }
         // webservice.fetchLegislators()
