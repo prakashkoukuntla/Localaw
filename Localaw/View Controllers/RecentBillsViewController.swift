@@ -45,7 +45,6 @@ class RecentBillsViewController: UIViewController {
     init(context: NSManagedObjectContext) {
         self.context = context
         super.init(nibName: nil, bundle: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleBillsUpdated(_:)), name: .billsUpdated, object: nil)
         tabBarItem.image = UIImage(systemName: "envelope.fill")
         tabBarItem.title = NSLocalizedString("recent_bills", comment: "")
         title = NSLocalizedString("recent_bills", comment: "")
@@ -92,11 +91,6 @@ class RecentBillsViewController: UIViewController {
         guard let context = context else { return }
         let categorySelectionViewController = CategorySelectionViewController(context: context)
         present(categorySelectionViewController, animated: true, completion: nil)
-        tableView.reloadData()
-    }
-    
-    @objc func handleBillsUpdated(_ notification: Notification) {
-        tableView.reloadData()
     }
 }
 
