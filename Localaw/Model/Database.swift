@@ -6,19 +6,15 @@ import Foundation
 import CoreData
 
 class Database {
-    var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-        */
+    var persistentContainer: NSPersistentContainer = Database.createPersistentContainer()
+    
+    static func createPersistentContainer() -> NSPersistentContainer {
         let container = NSPersistentContainer(name: "Localaw")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
+                
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -32,12 +28,12 @@ class Database {
         })
         container.viewContext.mergePolicy = NSMergePolicy.overwrite
         return container
-    }()
-
+    }
+    
     var context: NSManagedObjectContext { persistentContainer.viewContext }
-
+    
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -50,5 +46,15 @@ class Database {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func clear() {
+        let coordinator = persistentContainer.persistentStoreCoordinator
+        
+        for store in coordinator.persistentStores {
+            try! coordinator.destroyPersistentStore(at: store.url!, ofType: store.type, options: nil)
+        }
+        
+        persistentContainer = Self.createPersistentContainer()
     }
 }

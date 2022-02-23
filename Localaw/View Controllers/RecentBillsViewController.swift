@@ -56,7 +56,7 @@ class RecentBillsViewController: UIViewController {
         self.tableView = UITableView(frame: .zero, style: .insetGrouped)
 
         super.init(nibName: nil, bundle: nil)
-        
+  
         tableView.delegate = self
         tableView.dataSource = dataSource
         tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
