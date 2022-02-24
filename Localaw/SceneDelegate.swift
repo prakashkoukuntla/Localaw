@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBar.tabBar.tintColor = .legalPurple
         tabBar.viewControllers = [
             makeRecentBillsViewController(context: database.context),
-            makeSavedBillsViewController(),
+            makeSavedBillsViewController(context: database.context),
             makeSettingsViewController()
         ]
         return tabBar
@@ -78,8 +78,8 @@ extension SceneDelegate {
         return navigationController
     }
 
-    func makeSavedBillsViewController() -> UIViewController {
-        let controller = SavedBillsViewController()
+    func makeSavedBillsViewController(context: NSManagedObjectContext) -> UIViewController {
+        let controller = SavedBillsViewController(context: context)
         let navigationController = UINavigationController(rootViewController: controller)
         return navigationController
     }
