@@ -52,7 +52,7 @@ class Database {
         let coordinator = persistentContainer.persistentStoreCoordinator
         
         for store in coordinator.persistentStores {
-            try! coordinator.destroyPersistentStore(at: store.url!, ofType: store.type, options: nil)
+            try? coordinator.destroyPersistentStore(at: store.url!, ofType: store.type, options: nil)
         }
         
         persistentContainer = Self.createPersistentContainer()

@@ -7,12 +7,16 @@ import CoreData
 import WebKit
 
 class RecentBillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID> {
+    
     weak var context: NSManagedObjectContext?
     
     /// The `fetchedResultsController` is an object that listens to changes in the CoreData managed
     /// object context and will help update the table view (via the delegate that we specify)
-    lazy var fetchedResultsController: NSFetchedResultsController<CDBill> = {
-
+    var fetchedResultsController: NSFetchedResultsController<CDBill>
+    
+    init(context: NSManagedObjectContext?, tableView: UITableView) {
+        self.context = context
+        
         guard let context = context else {
             fatalError("If there's no context, the app should crash.")
         }
@@ -25,28 +29,29 @@ class RecentBillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectI
                                                             managedObjectContext: context,
                                                             sectionNameKeyPath: "category.cdName",
                                                             cacheName: nil)
-        controller.delegate = self
-        return controller
-    }()
-    
-    init(context: NSManagedObjectContext, tableView: UITableView, delegate: NSFetchedResultsControllerDelegate) {
-        self.context = context
-        super.init(tableView: tableView, cellProvider: {tableView, cell, id in
-            let bill = self.fetchedResultsController.object(at: indexPath)
+        
+        self.fetchedResultsController = controller
+        super.init(tableView: tableView, cellProvider: { tableView, indexPath, id in
+            let bill = controller.object(at: indexPath)
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-            
+
             var configuration = UIListContentConfiguration.subtitleCell()
             configuration.text = bill.title
             configuration.secondaryText = bill.longTitle
-            
+
             cell.accessoryType = .disclosureIndicator
             cell.contentConfiguration = configuration
 
             return cell
         })
-        fetchedResultsController.delegate = delegate
+    }
+    
+    func setDelegate(delegate: NSFetchedResultsControllerDelegate) {
         /// Tells the fetchedResultsController to get all of the relevant `CDBills` from the data base as well as
         /// to begin monitoring for update events
+        
+        fetchedResultsController.delegate = delegate
+        
         do {
             try fetchedResultsController.performFetch()
         } catch {
@@ -55,7 +60,16 @@ class RecentBillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectI
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        fetchedResultsController.sectionIndexTitles[section]
+        fetchedResultsController.sections?[section].name
+    }
+    
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        fetchedResultsController.sectionIndexTitles
+    }
+    
+    public func item(at indexPath: IndexPath) -> CDBill? {
+        let sectionInfo = fetchedResultsController.sections?[indexPath.section]
+        return sectionInfo?.objects?[indexPath.row] as? CDBill
     }
 }
 
@@ -63,9 +77,7 @@ class RecentBillsViewController: UIViewController {
 
     // MARK: - Variables
     
-    lazy var dataSource: RecentBillsDataSource = {
-        .init(context: context, tableView: tableView)
-    }()
+    var dataSource: RecentBillsDataSource
     
     var tableView: UITableView
     weak var context: NSManagedObjectContext?
@@ -75,8 +87,11 @@ class RecentBillsViewController: UIViewController {
     init(context: NSManagedObjectContext) {
         self.context = context
         self.tableView = UITableView(frame: .zero, style: .insetGrouped)
+        self.dataSource = .init(context: context, tableView: tableView)
 
         super.init(nibName: nil, bundle: nil)
+        
+        self.dataSource.setDelegate(delegate: self)
   
         tableView.delegate = self
         tableView.dataSource = dataSource
@@ -126,7 +141,7 @@ class RecentBillsViewController: UIViewController {
 extension RecentBillsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let bill = fetchedResultsController.fetchedObjects?[indexPath.row] else { return }
+        guard let bill = dataSource.item(at: indexPath) else { return }
         guard let websiteLink = bill.websiteLink else { return }
         let webViewController = WebViewController(url: websiteLink)
         navigationController?.pushViewController(webViewController, animated: true)
@@ -134,7 +149,7 @@ extension RecentBillsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return UISwipeActionsConfiguration(actions: [.init(style: .normal, title: "Save", handler: { (action, view, callback) in
-            guard let bill = self.fetchedResultsController.fetchedObjects?[indexPath.row] else {
+            guard let bill = self.dataSource.item(at: indexPath) else {
                 callback(false)
                 return
             }
