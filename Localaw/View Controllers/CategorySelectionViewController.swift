@@ -31,12 +31,16 @@ class CategorySelectionViewController: UIViewController {
         stackView.spacing = 10
         if UserDefaults.standard.array(forKey: "selectedCategories") == nil {
             stackView.addArrangedSubview(makeWelcomeLabel())
-            stackView.addArrangedSubview(makeColoradoLabel())
+            stackView.addArrangedSubview(makeNameLabel())
             stackView.addArrangedSubview(makeLogoImageView())
             stackView.addArrangedSubview(makeDescriptionLabel())
         }
         else {
-            stackView.addArrangedSubview(SpacerView(height: 40))
+            //stackView.addArrangedSubview(SpacerView()) //SPACER VIEW DOES NOT WORK
+            stackView.addArrangedSubview(makeBadSpacer())
+            stackView.addArrangedSubview(makeNameLabel())
+            stackView.addArrangedSubview(makeLogoImageView())
+            stackView.addArrangedSubview(makeSecondDescriptionLabel())
         }
         stackView.addArrangedSubview(categorySelectionView)
         stackView.addArrangedSubview(numberSelectedLabel)
@@ -96,9 +100,15 @@ class CategorySelectionViewController: UIViewController {
         return "Number Selected: \(number)"
     }
 
-    func makeColoradoLabel() -> UILabel {
+    func makeNameLabel() -> UILabel {
         let label = UILabel()
         label.text = "Localaw"
+        return label
+    }
+    
+    func makeBadSpacer() -> UILabel {
+        let label = UILabel()
+        label.text = "\n"
         return label
     }
 
@@ -115,6 +125,13 @@ class CategorySelectionViewController: UIViewController {
     func makeDescriptionLabel() -> UILabel {
         let label = UILabel()
         label.text = "Learn about your community's legislation. To get started, select bill categories you're interested in:"
+        label.numberOfLines = 0
+        return label
+    }
+    
+    func makeSecondDescriptionLabel() -> UILabel {
+        let label = UILabel()
+        label.text = "Select bill categories you're interested in:"
         label.numberOfLines = 0
         return label
     }
