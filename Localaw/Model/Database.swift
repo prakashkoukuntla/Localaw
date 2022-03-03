@@ -26,7 +26,7 @@ class Database {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        container.viewContext.mergePolicy = NSMergePolicy.overwrite
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
         return container
     }
 

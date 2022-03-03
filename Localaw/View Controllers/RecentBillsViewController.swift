@@ -4,98 +4,22 @@
 
 import UIKit
 import CoreData
-import WebKit
 
-class RecentBillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID> {
+class RecentBillsDataSource: BillsDataSource {
 
-    weak var context: NSManagedObjectContext?
-
-    /// The `fetchedResultsController` is an object that listens to changes in the CoreData managed
-    /// object context and will help update the table view (via the delegate that we specify)
-    var fetchedResultsController: NSFetchedResultsController<CDBill>
-
-    init(context: NSManagedObjectContext?, tableView: UITableView) {
-        self.context = context
-
-        guard let context = context else {
-            fatalError("If there's no context, the app should crash.")
-        }
-
-        /// A fetch request is responsible for narrowing down which data to search the database for. The first
-        /// filter is by entity type (in this case `CDBill`) and we can narrow it further with a predicate.
-        let fetchRequest: NSFetchRequest<CDBill> = CDBill.fetchRequest()
-        fetchRequest.sortDescriptors = [.init(keyPath: \CDBill.billNum, ascending: true)]
-        let controller = NSFetchedResultsController<CDBill>(fetchRequest: fetchRequest,
-                                                            managedObjectContext: context,
-                                                            sectionNameKeyPath: "category.cdName",
-                                                            cacheName: nil)
-
-        self.fetchedResultsController = controller
-        super.init(tableView: tableView, cellProvider: { tableView, indexPath, _ in
-            let bill = controller.object(at: indexPath)
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-
-            var configuration = UIListContentConfiguration.subtitleCell()
-            configuration.text = bill.title
-            configuration.secondaryText = bill.longTitle
-
-            cell.accessoryType = .disclosureIndicator
-            cell.contentConfiguration = configuration
-
-            return cell
-        })
-    }
-
-    func setDelegate(delegate: NSFetchedResultsControllerDelegate) {
-        /// Tells the fetchedResultsController to get all of the relevant `CDBills` from the data base as well as
-        /// to begin monitoring for update events
-
-        fetchedResultsController.delegate = delegate
-
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            assertionFailure(error.localizedDescription)
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        fetchedResultsController.sections?[section].name
-    }
-
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        fetchedResultsController.sectionIndexTitles
-    }
-
-    public func item(at indexPath: IndexPath) -> CDBill? {
-        let sectionInfo = fetchedResultsController.sections?[indexPath.section]
-        return sectionInfo?.objects?[indexPath.row] as? CDBill
+    override class func makeController(context: NSManagedObjectContext) -> BillsDataSource.Controller {
+            let request: Request = CDBill.fetchRequest()
+            request.sortDescriptors = [.init(keyPath: \CDBill.billNum, ascending: true)]
+            return .init(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "category.cdName", cacheName: nil)
     }
 }
 
-class RecentBillsViewController: UIViewController {
-
-    // MARK: - Variables
-
-    var dataSource: RecentBillsDataSource
-
-    var tableView: UITableView
-    weak var context: NSManagedObjectContext?
+class RecentBillsViewController: BillsViewController<RecentBillsDataSource> {
 
     // MARK: - Initialization
 
-    init(context: NSManagedObjectContext) {
-        self.context = context
-        self.tableView = UITableView(frame: .zero, style: .insetGrouped)
-        self.dataSource = .init(context: context, tableView: tableView)
-
-        super.init(nibName: nil, bundle: nil)
-
-        self.dataSource.setDelegate(delegate: self)
-
-        tableView.delegate = self
-        tableView.dataSource = dataSource
-        tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
+    override init(context: NSManagedObjectContext) {
+        super.init(context: context)
 
         tabBarItem.image = UIImage(systemName: "envelope.fill")
         tabBarItem.title = NSLocalizedString("recent_bills", comment: "")
@@ -106,20 +30,9 @@ class RecentBillsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - View lifecycle
-
-    override func loadView() {
-        view = tableView
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureNavigationController()
-    }
-
     // MARK: - Configuration
 
-    private func configureNavigationController() {
+    override func configureNavigationController() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "Filter"),
@@ -135,40 +48,5 @@ class RecentBillsViewController: UIViewController {
         guard let context = context else { return }
         let categorySelectionViewController = CategorySelectionViewController(context: context)
         present(categorySelectionViewController, animated: true, completion: nil)
-    }
-}
-
-extension RecentBillsViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let bill = dataSource.item(at: indexPath) else { return }
-        guard let websiteLink = bill.websiteLink else { return }
-        let webViewController = WebViewController(url: websiteLink)
-        navigationController?.pushViewController(webViewController, animated: true)
-    }
-
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        guard let bill = self.dataSource.item(at: indexPath) else {
-            return nil
-        }
-
-        let title = bill.saved ? NSLocalizedString("unsave", comment: "") : NSLocalizedString("save", comment: "")
-
-        return UISwipeActionsConfiguration(actions: [.init(style: .normal, title: title, handler: { (_, _, callback) in
-            bill.saved.toggle()
-            callback(true)
-        })])
-    }
-
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        .none
-    }
-}
-
-extension RecentBillsViewController: NSFetchedResultsControllerDelegate {
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
-        dataSource.apply(snapshot as NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>)
     }
 }
