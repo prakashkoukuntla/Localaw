@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		031830F827B73517007A94C3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031830F727B73517007A94C3 /* WebViewController.swift */; };
 		035225FE27A4C397006A8DED /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035225FD27A4C397006A8DED /* Database.swift */; };
+		03F400DD27D0406700D20CC6 /* BillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F400DC27D0406700D20CC6 /* BillsViewController.swift */; };
 		073B37E12792494800896EF5 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073B37E02792494800896EF5 /* SpacerView.swift */; };
 		073C231D2743363B009FC216 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C231C2743363B009FC216 /* TextFieldCell.swift */; };
 		073C23222743364C009FC216 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C23212743364C009FC216 /* ToggleCell.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		031830F727B73517007A94C3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		035225FD27A4C397006A8DED /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		03F400DC27D0406700D20CC6 /* BillsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsViewController.swift; sourceTree = "<group>"; };
 		073B37E02792494800896EF5 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		073C231C2743363B009FC216 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		073C23212743364C009FC216 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				07406698279B844E00F8BB98 /* BillDetailViewController.swift */,
+				03F400DC27D0406700D20CC6 /* BillsViewController.swift */,
 				0782BDB7272CB650001D12C8 /* RecentBillsViewController.swift */,
 				0745AF4427335668000E3500 /* SavedBillsViewController.swift */,
 				0745AF49273356AF000E3500 /* SettingsViewController.swift */,
@@ -487,6 +490,7 @@
 				073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */,
 				035225FE27A4C397006A8DED /* Database.swift in Sources */,
 				073B37E12792494800896EF5 /* SpacerView.swift in Sources */,
+				03F400DD27D0406700D20CC6 /* BillsViewController.swift in Sources */,
 				0782BDB8272CB650001D12C8 /* RecentBillsViewController.swift in Sources */,
 				073C23272743365F009FC216 /* TextCell.swift in Sources */,
 				073C25B8275845B9002B278A /* CategorySelectionView.swift in Sources */,
