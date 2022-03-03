@@ -8,11 +8,14 @@ import CoreData
 
 class CategorySelectionViewController: UIViewController {
     lazy var numberSelectedLabel = makeNumberSelectedLabel()
-    var categorySelectionView = CategorySelectionView()
+    var categorySelectionView: CategorySelectionView
     weak var context: NSManagedObjectContext?
+    var selectedCategories: Set<String>
 
-    init(context: NSManagedObjectContext) {
+    init(context: NSManagedObjectContext, selectedCategories: Set<String>) {
         self.context = context
+        self.categorySelectionView = CategorySelectionView(selectedCategories: selectedCategories)
+        self.selectedCategories = selectedCategories
         super.init(nibName: nil, bundle: nil)
         categorySelectionView.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(handleBillsUpdated(_:)), name: .billsUpdated, object: nil)
@@ -92,7 +95,7 @@ class CategorySelectionViewController: UIViewController {
 
     func makeNumberSelectedLabel() -> UILabel {
         let label = UILabel()
-        label.text = makeNumberSelectedLabelText(number: 0)
+        label.text = makeNumberSelectedLabelText(number: selectedCategories.count)
         return label
     }
 

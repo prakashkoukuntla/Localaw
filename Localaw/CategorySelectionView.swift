@@ -22,13 +22,14 @@ class CategorySelectionView: UIView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Tag", for: indexPath)
             if let cell = cell as? TagCell {
                 cell.label.text = itemIdentifier
-
+                cell.isSelected = self.selectedCategories.contains(itemIdentifier)
             }
             return cell
         })
     }()
 
-    init() {
+    init(selectedCategories: Set<String>) {
+        self.selectedCategories = selectedCategories
         selectAllView = UIView()
         let layout = UICollectionViewFlowLayout()
         // layout.itemSize = .init(width: 50, height: 20)
@@ -85,6 +86,7 @@ class CategorySelectionView: UIView {
         // dataSource.apply(initialSnapshot)
 
         dataSource.apply(initialSnapshot, animatingDifferences: false, completion: nil)
+        
     }
 
 }
@@ -95,7 +97,6 @@ extension CategorySelectionView: UICollectionViewDelegate {
         selectedCategories.insert(category)
         print(selectedCategories)
         delegate?.numberOfSelectedCategoriesChanged(to: selectedCategories.count)
-
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {

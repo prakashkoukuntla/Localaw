@@ -11,7 +11,7 @@ class TagCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 label.textColor = .white
-                contentView.backgroundColor = .purple
+                contentView.backgroundColor = .legalPurple
                 contentView.layer.borderColor = UIColor.clear.cgColor
                 contentView.layer.borderWidth = 1
                 contentView.layer.cornerRadius = 4

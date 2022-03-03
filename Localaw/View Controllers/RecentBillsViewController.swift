@@ -133,7 +133,8 @@ class RecentBillsViewController: UIViewController {
 
     @objc func isClicked(_ item: UIBarButtonItem) {
         guard let context = context else { return }
-        let categorySelectionViewController = CategorySelectionViewController(context: context)
+        let categories = UserDefaults.standard.array(forKey: "selectedCategories") as? [String] ?? []
+        let categorySelectionViewController = CategorySelectionViewController(context: context, selectedCategories: Set(categories))
         present(categorySelectionViewController, animated: true, completion: nil)
     }
 }
