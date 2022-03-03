@@ -7,16 +7,16 @@ import CoreData
 import WebKit
 
 class RecentBillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID> {
-    
+
     weak var context: NSManagedObjectContext?
-    
+
     /// The `fetchedResultsController` is an object that listens to changes in the CoreData managed
     /// object context and will help update the table view (via the delegate that we specify)
     var fetchedResultsController: NSFetchedResultsController<CDBill>
-    
+
     init(context: NSManagedObjectContext?, tableView: UITableView) {
         self.context = context
-        
+
         guard let context = context else {
             fatalError("If there's no context, the app should crash.")
         }
@@ -29,9 +29,9 @@ class RecentBillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectI
                                                             managedObjectContext: context,
                                                             sectionNameKeyPath: "category.cdName",
                                                             cacheName: nil)
-        
+
         self.fetchedResultsController = controller
-        super.init(tableView: tableView, cellProvider: { tableView, indexPath, id in
+        super.init(tableView: tableView, cellProvider: { tableView, indexPath, _ in
             let bill = controller.object(at: indexPath)
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
 
@@ -45,28 +45,28 @@ class RecentBillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectI
             return cell
         })
     }
-    
+
     func setDelegate(delegate: NSFetchedResultsControllerDelegate) {
         /// Tells the fetchedResultsController to get all of the relevant `CDBills` from the data base as well as
         /// to begin monitoring for update events
-        
+
         fetchedResultsController.delegate = delegate
-        
+
         do {
             try fetchedResultsController.performFetch()
         } catch {
             assertionFailure(error.localizedDescription)
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         fetchedResultsController.sections?[section].name
     }
-    
+
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         fetchedResultsController.sectionIndexTitles
     }
-    
+
     public func item(at indexPath: IndexPath) -> CDBill? {
         let sectionInfo = fetchedResultsController.sections?[indexPath.section]
         return sectionInfo?.objects?[indexPath.row] as? CDBill
@@ -76,9 +76,9 @@ class RecentBillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectI
 class RecentBillsViewController: UIViewController {
 
     // MARK: - Variables
-    
+
     var dataSource: RecentBillsDataSource
-    
+
     var tableView: UITableView
     weak var context: NSManagedObjectContext?
 
@@ -90,9 +90,9 @@ class RecentBillsViewController: UIViewController {
         self.dataSource = .init(context: context, tableView: tableView)
 
         super.init(nibName: nil, bundle: nil)
-        
+
         self.dataSource.setDelegate(delegate: self)
-  
+
         tableView.delegate = self
         tableView.dataSource = dataSource
         tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
@@ -146,24 +146,28 @@ extension RecentBillsViewController: UITableViewDelegate {
         let webViewController = WebViewController(url: websiteLink)
         navigationController?.pushViewController(webViewController, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        return UISwipeActionsConfiguration(actions: [.init(style: .normal, title: "Save", handler: { (action, view, callback) in
-            guard let bill = self.dataSource.item(at: indexPath) else {
-                callback(false)
-                return
-            }
-            bill.saved = true
+
+        guard let bill = self.dataSource.item(at: indexPath) else {
+            return nil
+        }
+
+        let title = bill.saved ? NSLocalizedString("unsave", comment: "") : NSLocalizedString("save", comment: "")
+
+        return UISwipeActionsConfiguration(actions: [.init(style: .normal, title: title, handler: { (_, _, callback) in
+            bill.saved.toggle()
+            callback(true)
         })])
     }
-    
+
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         .none
     }
 }
 
 extension RecentBillsViewController: NSFetchedResultsControllerDelegate {
-    
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
         dataSource.apply(snapshot as NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>)
     }

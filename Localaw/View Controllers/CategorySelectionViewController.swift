@@ -34,9 +34,8 @@ class CategorySelectionViewController: UIViewController {
             stackView.addArrangedSubview(makeNameLabel())
             stackView.addArrangedSubview(makeLogoImageView())
             stackView.addArrangedSubview(makeDescriptionLabel())
-        }
-        else {
-            //stackView.addArrangedSubview(SpacerView()) //SPACER VIEW DOES NOT WORK
+        } else {
+            // stackView.addArrangedSubview(SpacerView()) //SPACER VIEW DOES NOT WORK
             stackView.addArrangedSubview(makeBadSpacer())
             stackView.addArrangedSubview(makeNameLabel())
             stackView.addArrangedSubview(makeLogoImageView())
@@ -105,7 +104,7 @@ class CategorySelectionViewController: UIViewController {
         label.text = "Localaw"
         return label
     }
-    
+
     func makeBadSpacer() -> UILabel {
         let label = UILabel()
         label.text = "\n"
@@ -128,14 +127,14 @@ class CategorySelectionViewController: UIViewController {
         label.numberOfLines = 0
         return label
     }
-    
+
     func makeSecondDescriptionLabel() -> UILabel {
         let label = UILabel()
         label.text = "Select bill categories you're interested in:"
         label.numberOfLines = 0
         return label
     }
-    
+
     @objc func handleBillsUpdated(_ notification: Notification) {
         categorySelectionView.applyInitialSnapshot()
     }
@@ -147,7 +146,7 @@ extension CategorySelectionViewController: CategorySelectionDelegate {
         let fetchRequest: NSFetchRequest<CDBillCategory> = CDBillCategory.fetchRequest()
         return (try? context?.fetch(fetchRequest)) ?? []
     }
-    
+
     func numberOfSelectedCategoriesChanged(to number: Int) {
         numberSelectedLabel.text = makeNumberSelectedLabelText(number: number)
     }

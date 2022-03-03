@@ -8,3 +8,5 @@
 "recent_bills" = "Recent Bills";
 "settings" = "Settings";
 "saved_bills" = "Saved Bills";
+"unsave" = "Unsave";
+"save" = "Save";
