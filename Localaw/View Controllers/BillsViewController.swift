@@ -57,6 +57,8 @@ open class BillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID
                 configuration.text = bill.title
                 configuration.secondaryText = bill.longTitle
                 configuration.textToSecondaryTextVerticalPadding = 5
+                configuration.secondaryTextProperties.color = .darkGray
+                configuration.secondaryTextProperties.font = .systemFont(ofSize: 13)
 
                 cell.accessoryType = .disclosureIndicator
                 cell.contentConfiguration = configuration
