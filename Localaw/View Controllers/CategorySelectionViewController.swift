@@ -141,10 +141,10 @@ class CategorySelectionViewController: UIViewController {
     @objc func handleBillsUpdated(_ notification: Notification) {
         categorySelectionView.applyInitialSnapshot()
     }
-
 }
 
 extension CategorySelectionViewController: CategorySelectionDelegate {
+    
     func allCategories() -> [CDBillCategory] {
         let fetchRequest: NSFetchRequest<CDBillCategory> = CDBillCategory.fetchRequest()
         return (try? context?.fetch(fetchRequest)) ?? []

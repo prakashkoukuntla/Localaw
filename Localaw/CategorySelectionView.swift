@@ -18,11 +18,11 @@ class CategorySelectionView: UIView {
     weak var delegate: CategorySelectionDelegate?
 
     lazy var dataSource: UICollectionViewDiffableDataSource<Int, String> = {
-        UICollectionViewDiffableDataSource<Int, String>(collectionView: tagView, cellProvider: {collectionView, indexPath, itemIdentifier in
+        .init(collectionView: tagView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Tag", for: indexPath)
             if let cell = cell as? TagCell {
                 cell.label.text = itemIdentifier
-                cell.isSelected = self.selectedCategories.contains(itemIdentifier)
+                cell.isChosen = self.selectedCategories.contains(itemIdentifier)
             }
             return cell
         })
@@ -44,6 +44,7 @@ class CategorySelectionView: UIView {
         tagView.layer.cornerCurve = .continuous
         tagView.allowsMultipleSelection = true
         tagView.contentInset = .init(top: 10, left: 10, bottom: 10, right: 10)
+        
         super.init(frame: .zero)
         // backgroundColor = .gray
         let stack = UIStackView(arrangedSubviews: [/*selectAllView,*/tagView])
@@ -83,36 +84,28 @@ class CategorySelectionView: UIView {
         var initialSnapshot = NSDiffableDataSourceSnapshot<Int, String>()
         initialSnapshot.appendSections([0])
         initialSnapshot.appendItems(uniqueCategoryStrings)
-        // dataSource.apply(initialSnapshot)
 
         dataSource.apply(initialSnapshot, animatingDifferences: false, completion: nil)
-        
     }
-
 }
 
 extension CategorySelectionView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let category = dataSource.itemIdentifier(for: indexPath) else { return }
-        selectedCategories.insert(category)
-        print(selectedCategories)
-        delegate?.numberOfSelectedCategoriesChanged(to: selectedCategories.count)
-    }
-
+    
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        guard let category = dataSource.itemIdentifier(for: indexPath) else { return true }
+        
+        guard let category = dataSource.itemIdentifier(for: indexPath) else { return false }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? TagCell else { return false }
+        
         if selectedCategories.contains(category) {
-            collectionView.deselectItem(at: indexPath, animated: false)
-            return false
+            cell.isChosen = false
+            selectedCategories.remove(category)
         } else {
-            return true
+            cell.isChosen = true
+            selectedCategories.insert(category)
         }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let category = dataSource.itemIdentifier(for: indexPath) else { return }
-        selectedCategories.remove(category)
-        print(selectedCategories)
+        
         delegate?.numberOfSelectedCategoriesChanged(to: selectedCategories.count)
+        
+        return false
     }
 }
