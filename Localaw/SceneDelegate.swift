@@ -39,6 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         window = UIWindow(windowScene: scene)
+        window?.tintColor = .legalPurple
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
         showBillCategoriesModalIfNeeded()
