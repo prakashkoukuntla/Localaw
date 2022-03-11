@@ -8,9 +8,14 @@ import CoreData
 class RecentBillsDataSource: BillsDataSource {
     
     override class func makeController(context: NSManagedObjectContext) -> BillsDataSource.Controller {
+        let categories = UserDefaults.standard.array(forKey: "selectedCategories") as? [String] ?? []
+        let weekAgo = Date(timeIntervalSinceNow: -60 * 60 * 24 * 7)
+        
         let request: Request = CDBill.fetchRequest()
         request.sortDescriptors = [.init(key: "category.cdName", ascending: true)]
-//        request.predicate = NSPredicate(format: "summarizedHistory.last.date > %@ ", Date())
+        request.predicate = NSPredicate(format: "(SUBQUERY(summarizedHistory.date, $date, $date >= %@) .@count > 0) AND category.cdName IN %@",
+                                        weekAgo as NSDate,
+                                        categories)
         return .init(fetchRequest: request,
                      managedObjectContext: context,
                      sectionNameKeyPath: "category.cdName",

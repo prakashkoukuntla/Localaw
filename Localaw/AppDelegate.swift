@@ -33,6 +33,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // cdBill.sponsors
                         cdBill.title = bill.title
                         cdBill.websiteLink = bill.websiteLink
+                        
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy-MM-dd"
+                        
+                        let history: [CDHistory] = bill.summarizedHistory.map {
+                            let history = CDHistory(context: database.context)
+                            history.date = formatter.date(from: $0.date)
+                            history.action = $0.action
+                            history.location = $0.location
+                            return history
+                        }
+                        cdBill.summarizedHistory = NSSet(array: history)
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

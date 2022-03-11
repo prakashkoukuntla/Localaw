@@ -155,7 +155,8 @@ open class BillsViewController<DataSource: BillsDataSource>: UIViewController, U
 
     // MARK: - NSFetchedResultsControllerDelegate
 
-    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
-        dataSource.apply(snapshot as NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>)
+    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                           didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+        dataSource.applySnapshotUsingReloadData(snapshot as NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>, completion: nil)
     }
 }
