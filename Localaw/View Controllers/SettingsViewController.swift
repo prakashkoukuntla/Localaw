@@ -104,7 +104,7 @@ extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath.section, indexPath.row) {
         case (1, 0):
-            UIApplication.shared.open(URL(string: "https://youtube.com")!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string: "https://localaw.weebly.com/privacy-policy.html")!, options: [:], completionHandler: nil)
         case (1, 1):
             sendEmail()
         case (1, 2):
