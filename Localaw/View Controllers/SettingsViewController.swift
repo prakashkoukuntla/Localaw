@@ -42,15 +42,13 @@ extension SettingsViewController: UITableViewDelegate {
 }
 
 extension SettingsViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { 3 }
+    func numberOfSections(in tableView: UITableView) -> Int { 2 }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
-        case 1:
             return 2
-        case 2:
+        case 1:
             return 3
         default:
             return 0
@@ -61,13 +59,6 @@ extension SettingsViewController: UITableViewDataSource {
         let cell: UITableViewCell
         switch indexPath.section {
         case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath)
-            guard let textFieldCell = cell as? TextFieldCell else { return cell }
-            textFieldCell.textField.delegate = self
-            textFieldCell.textField.placeholder = "example@email.com"
-            textFieldCell.textField.text = UserDefaults.standard.string(forKey: "email")
-
-        case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "ToggleCell", for: indexPath)
             guard let toggleCell = cell as? ToggleCell else { return cell }
             switch indexPath.row {
@@ -91,7 +82,7 @@ extension SettingsViewController: UITableViewDataSource {
                 fatalError()
             }
 
-        case 2:
+        case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
             cell.accessoryType = .disclosureIndicator
             switch indexPath.row {
@@ -112,11 +103,11 @@ extension SettingsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath.section, indexPath.row) {
-        case (2, 0):
-            UIApplication.shared.open(URL(string: "https://google.com")!, options: [:], completionHandler: nil)
-        case (2, 1):
+        case (1, 0):
+            UIApplication.shared.open(URL(string: "https://youtube.com")!, options: [:], completionHandler: nil)
+        case (1, 1):
             sendEmail()
-        case (2, 2):
+        case (1, 2):
             UIApplication.shared.open(URL(string: "https://localaw.weebly.com")!, options: [:], completionHandler: nil)
         default:
             break
@@ -127,10 +118,8 @@ extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Email Information"
-        case 1:
             return "Notifications"
-        case 2:
+        case 1:
             return "Other"
         default:
             return nil
@@ -143,7 +132,7 @@ extension SettingsViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         UserDefaults.standard.setValue(textField.text, forKey: "email")
     }
@@ -156,7 +145,7 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
             mail.mailComposeDelegate = self
             mail.setToRecipients(["pkoukuntla1@gmail.com"])
             mail.setSubject("Localaw Feedback")
-            // mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
 
             present(mail, animated: true)
         } else {
