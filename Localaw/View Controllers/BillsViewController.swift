@@ -51,17 +51,11 @@ open class BillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID
         controller: Controller) -> CellProvider {
             return { tableView, indexPath, _ in
                 let bill = controller.object(at: indexPath)
-                let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-
-                var configuration = UIListContentConfiguration.subtitleCell()
-                configuration.text = bill.title
-                configuration.secondaryText = bill.longTitle
-                configuration.textToSecondaryTextVerticalPadding = 5
-                configuration.secondaryTextProperties.color = .darkGray
-                configuration.secondaryTextProperties.font = .systemFont(ofSize: 13)
-
-                cell.accessoryType = .disclosureIndicator
-                cell.contentConfiguration = configuration
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BillCell", for: indexPath)
+                
+                if let cell = cell as? BillCell {
+                    cell.configure(with: bill)
+                }
 
                 return cell
             }
@@ -103,7 +97,7 @@ open class BillsViewController<DataSource: BillsDataSource>: UIViewController, U
 
         tableView.delegate = self
         tableView.dataSource = dataSource
-        tableView.register(TextCell.self, forCellReuseIdentifier: "TextCell")
+        tableView.register(BillCell.self, forCellReuseIdentifier: "BillCell")
     }
 
     required public init?(coder: NSCoder) {
@@ -140,13 +134,14 @@ open class BillsViewController<DataSource: BillsDataSource>: UIViewController, U
             return nil
         }
 
-        let title = bill.saved ? NSLocalizedString("unsave", comment: "") : NSLocalizedString("save", comment: "")
-
-        return UISwipeActionsConfiguration(actions: [.init(style: .normal, title: title, handler: { (_, _, callback) in
+        let action = UIContextualAction(style: .normal, title: nil, handler: { _, _, callback in
             bill.saved.toggle()
             try? self.context?.save()
             callback(true)
-        })])
+        })
+        action.image = bill.saved ? UIImage(systemName: "bookmark.slash.fill") : UIImage(systemName: "bookmark.fill")
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
     }
 
     public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {

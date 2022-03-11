@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		031830F827B73517007A94C3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031830F727B73517007A94C3 /* WebViewController.swift */; };
+		034C4E2927DACF03006F4EDE /* BillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034C4E2827DACF03006F4EDE /* BillCell.swift */; };
 		035225FE27A4C397006A8DED /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035225FD27A4C397006A8DED /* Database.swift */; };
 		03F400DD27D0406700D20CC6 /* BillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F400DC27D0406700D20CC6 /* BillsViewController.swift */; };
 		073B37E12792494800896EF5 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073B37E02792494800896EF5 /* SpacerView.swift */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		031830F727B73517007A94C3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		034C4E2827DACF03006F4EDE /* BillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillCell.swift; sourceTree = "<group>"; };
 		035225FD27A4C397006A8DED /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		03F400DC27D0406700D20CC6 /* BillsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsViewController.swift; sourceTree = "<group>"; };
 		073B37E02792494800896EF5 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				073C231C2743363B009FC216 /* TextFieldCell.swift */,
 				073C23212743364C009FC216 /* ToggleCell.swift */,
 				073C23262743365F009FC216 /* TextCell.swift */,
+				034C4E2827DACF03006F4EDE /* BillCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				073F024827AB55C100759366 /* WebService.swift in Sources */,
 				073C900E2755A62B0039A1BC /* CategorySelectionViewController.swift in Sources */,
 				073C25BD27584763002B278A /* UIView+Extensions.swift in Sources */,
+				034C4E2927DACF03006F4EDE /* BillCell.swift in Sources */,
 				035225FE27A4C397006A8DED /* Database.swift in Sources */,
 				073B37E12792494800896EF5 /* SpacerView.swift in Sources */,
 				03F400DD27D0406700D20CC6 /* BillsViewController.swift in Sources */,
