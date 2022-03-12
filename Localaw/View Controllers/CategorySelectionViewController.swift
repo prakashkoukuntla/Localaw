@@ -74,6 +74,7 @@ class CategorySelectionViewController: UIViewController {
             guard let self = self else { return }
             let categories = Array(self.categorySelectionView.selectedCategories)
             UserDefaults.standard.set(categories, forKey: "selectedCategories")
+            NotificationCenter.default.post(name: .categoriesUpdated, object: categories)
             self.dismiss(animated: true, completion: nil)
         }), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
@@ -153,4 +154,8 @@ extension CategorySelectionViewController: CategorySelectionDelegate {
     func numberOfSelectedCategoriesChanged(to number: Int) {
         numberSelectedLabel.text = makeNumberSelectedLabelText(number: number)
     }
+}
+
+extension Notification.Name {
+    static let categoriesUpdated = Notification.Name("categoriesUpdated")
 }

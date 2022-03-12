@@ -7,16 +7,23 @@ import CoreData
 
 class RecentBillsDataSource: BillsDataSource {
     
-    override class func makeController(context: NSManagedObjectContext) -> BillsDataSource.Controller {
+    class func makePredicate() -> NSPredicate {
         let categories = UserDefaults.standard.array(forKey: "selectedCategories") as? [String] ?? []
         let weekAgo = Date(timeIntervalSinceNow: -60 * 60 * 24 * 7)
-        
+        return NSPredicate(format: "(SUBQUERY(summarizedHistory.date, $date, $date >= %@) .@count > 0) AND category.cdName IN %@",
+                           weekAgo as NSDate,
+                           categories)
+    }
+    
+    class func makeFetchRequest() -> NSFetchRequest<CDBill> {
         let request: Request = CDBill.fetchRequest()
         request.sortDescriptors = [.init(key: "category.cdName", ascending: true)]
-        request.predicate = NSPredicate(format: "(SUBQUERY(summarizedHistory.date, $date, $date >= %@) .@count > 0) AND category.cdName IN %@",
-                                        weekAgo as NSDate,
-                                        categories)
-        return .init(fetchRequest: request,
+        request.predicate = makePredicate()
+        return request
+    }
+    
+    override class func makeController(context: NSManagedObjectContext) -> BillsDataSource.Controller {
+        return .init(fetchRequest: makeFetchRequest(),
                      managedObjectContext: context,
                      sectionNameKeyPath: "category.cdName",
                      cacheName: nil)
@@ -33,6 +40,8 @@ class RecentBillsViewController: BillsViewController<RecentBillsDataSource> {
         tabBarItem.image = UIImage(systemName: "envelope.fill")
         tabBarItem.title = NSLocalizedString("recent_bills", comment: "")
         title = NSLocalizedString("recent_bills", comment: "")
+        
+        handleNotifications()
     }
     
     required init?(coder: NSCoder) {
@@ -58,5 +67,15 @@ class RecentBillsViewController: BillsViewController<RecentBillsDataSource> {
         let categories = UserDefaults.standard.array(forKey: "selectedCategories") as? [String] ?? []
         let categorySelectionViewController = CategorySelectionViewController(context: context, selectedCategories: Set(categories))
         present(categorySelectionViewController, animated: true, completion: nil)
+    }
+}
+
+extension RecentBillsViewController {
+    
+    func handleNotifications() {
+        NotificationCenter.default.addObserver(forName: .categoriesUpdated, object: nil, queue: .main) { notification in
+            self.dataSource.fetchedResultsController.fetchRequest.predicate = type(of: self.dataSource).makePredicate()
+            try? self.dataSource.fetchedResultsController.performFetch()
+        }
     }
 }
