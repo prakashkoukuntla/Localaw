@@ -67,7 +67,27 @@ extension SettingsViewController: UITableViewDataSource {
                 toggleCell.toggle.isOn = UserDefaults.standard.bool(forKey: "Saved")
                 toggleCell.toggle.addAction(.init(handler: { (action) in
                     if let sender = action.sender as? UISwitch {
-                        UserDefaults.standard.set(sender.isOn, forKey: "Saved")
+                        let center = UNUserNotificationCenter.current()
+                        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                            
+                            if let error = error {
+                                // Handle the error here.
+                            }
+                            
+                            // Enable or disable features based on the authorization.
+                        }
+                        center.getNotificationSettings { settings in
+                            guard (settings.authorizationStatus == .authorized) ||
+                                  (settings.authorizationStatus == .provisional) else { return }
+
+                            if settings.alertSetting == .enabled {
+                                // Schedule an alert-only notification.
+                                UserDefaults.standard.set(sender.isOn, forKey: "Saved")
+                            } else {
+                                // Schedule a notification with a badge and sound.
+                                UserDefaults.standard.set(false, forKey: "Saved")
+                            }
+                        }
                     }
                 }), for: .valueChanged)
             case 1:
@@ -75,7 +95,27 @@ extension SettingsViewController: UITableViewDataSource {
                 toggleCell.toggle.isOn = UserDefaults.standard.bool(forKey: "Recent")
                 toggleCell.toggle.addAction(.init(handler: { (action) in
                     if let sender = action.sender as? UISwitch {
-                        UserDefaults.standard.set(sender.isOn, forKey: "Recent")
+                        let center = UNUserNotificationCenter.current()
+                        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                            
+                            if let error = error {
+                                // Handle the error here.
+                            }
+                            
+                            // Enable or disable features based on the authorization.
+                        }
+                        center.getNotificationSettings { settings in
+                            guard (settings.authorizationStatus == .authorized) ||
+                                  (settings.authorizationStatus == .provisional) else { return }
+
+                            if settings.alertSetting == .enabled {
+                                // Schedule an alert-only notification.
+                                UserDefaults.standard.set(sender.isOn, forKey: "Recent")
+                            } else {
+                                // Schedule a notification with a badge and sound.
+                                UserDefaults.standard.set(false, forKey: "Recent")
+                            }
+                        }
                     }
                 }), for: .valueChanged)
             default:
