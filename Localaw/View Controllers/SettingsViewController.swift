@@ -69,17 +69,15 @@ extension SettingsViewController: UITableViewDataSource {
                     if let sender = action.sender as? UISwitch {
                         let center = UNUserNotificationCenter.current()
                         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-                            
                             if let error = error {
                                 // Handle the error here.
                             }
-                            
                             // Enable or disable features based on the authorization.
                         }
-                        center.getNotificationSettings { settings in
+                        let bad_center = UNUserNotificationCenter.current()
+                        bad_center.getNotificationSettings { settings in
                             guard (settings.authorizationStatus == .authorized) ||
                                   (settings.authorizationStatus == .provisional) else { return }
-
                             if settings.alertSetting == .enabled {
                                 // Schedule an alert-only notification.
                                 UserDefaults.standard.set(sender.isOn, forKey: "Saved")
@@ -97,17 +95,14 @@ extension SettingsViewController: UITableViewDataSource {
                     if let sender = action.sender as? UISwitch {
                         let center = UNUserNotificationCenter.current()
                         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-                            
                             if let error = error {
                                 // Handle the error here.
                             }
-                            
                             // Enable or disable features based on the authorization.
                         }
                         center.getNotificationSettings { settings in
                             guard (settings.authorizationStatus == .authorized) ||
                                   (settings.authorizationStatus == .provisional) else { return }
-
                             if settings.alertSetting == .enabled {
                                 // Schedule an alert-only notification.
                                 UserDefaults.standard.set(sender.isOn, forKey: "Recent")
