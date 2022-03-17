@@ -11,6 +11,7 @@ class CategorySelectionViewController: UIViewController {
     var categorySelectionView: CategorySelectionView
     weak var context: NSManagedObjectContext?
     var selectedCategories: Set<String>
+    var loadingIndicator = UIActivityIndicatorView(style: .large)
 
     init(context: NSManagedObjectContext, selectedCategories: Set<String>) {
         self.context = context
@@ -48,7 +49,9 @@ class CategorySelectionViewController: UIViewController {
         stackView.addArrangedSubview(numberSelectedLabel)
         stackView.addArrangedSubview(SpacerView())
         stackView.addArrangedSubview(makeContinueButton())
-
+        
+        stackView.addSubview(loadingIndicator)
+        
         containerView.embed(view: stackView,
                             padding: .init(top: 20, left: 20, bottom: 20, right: 20))
         view = containerView
@@ -58,6 +61,13 @@ class CategorySelectionViewController: UIViewController {
         super.viewDidLoad()
         isModalInPresentation = true
         categorySelectionView.applyInitialSnapshot()
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
+        loadingIndicator.startAnimating()
     }
 
     func makeWelcomeLabel() -> UILabel {
@@ -141,6 +151,7 @@ class CategorySelectionViewController: UIViewController {
 
     @objc func handleBillsUpdated(_ notification: Notification) {
         categorySelectionView.applyInitialSnapshot()
+        loadingIndicator.stopAnimating()
     }
 }
 

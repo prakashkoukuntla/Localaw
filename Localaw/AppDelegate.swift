@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                 database.saveContext()
                 NotificationCenter.default.post(name: .billsUpdated, object: nil)
+                UserDefaults.standard.setValue(true, forKey: "Bills Downloaded")
             }
         }
         // webservice.fetchLegislators()
