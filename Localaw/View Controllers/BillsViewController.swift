@@ -50,6 +50,7 @@ open class BillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID
     static func makeCellProvider(
         controller: Controller) -> CellProvider {
             return { tableView, indexPath, _ in
+                
                 let bill = controller.object(at: indexPath)
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BillCell", for: indexPath)
                 
@@ -150,7 +151,8 @@ open class BillsViewController<DataSource: BillsDataSource>: UIViewController, U
 
     // MARK: - NSFetchedResultsControllerDelegate
 
-    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                           didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
         dataSource.apply(snapshot as NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>)
     }
 }
