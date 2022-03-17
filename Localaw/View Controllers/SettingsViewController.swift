@@ -54,7 +54,41 @@ extension SettingsViewController: UITableViewDataSource {
             return 0
         }
     }
-
+    
+    func promptForAuthorization(sender: UISwitch, center: UNUserNotificationCenter, key: String) {
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            DispatchQueue.main.async {
+                sender.isOn = granted
+                UserDefaults.standard.setValue(granted, forKey: key)
+                // TODO: handle error
+            }
+        }
+    }
+    
+    func promptForChangeNotificationSettings() {
+        let url = URL(string: UIApplication.openSettingsURLString)!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func handleNotificationToggle(key: String, sender: UISwitch) {
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { [unowned self] settings in
+            DispatchQueue.main.async {
+                switch settings.authorizationStatus {
+                case .notDetermined:
+                    promptForAuthorization(sender: sender, center: center, key: key)
+                case .denied:
+                    sender.isOn = false
+                    promptForChangeNotificationSettings()
+                case .authorized, .ephemeral, .provisional:
+                    UserDefaults.standard.setValue(sender.isOn, forKey: key)
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         switch indexPath.section {
@@ -64,53 +98,18 @@ extension SettingsViewController: UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 toggleCell.textLabel?.text = "Notify for Saved Bill Updates"
-                toggleCell.toggle.isOn = UserDefaults.standard.bool(forKey: "Saved")
+                toggleCell.toggle.isOn = UserDefaults.standard.bool(forKey: "NotifyForSaved")
                 toggleCell.toggle.addAction(.init(handler: { (action) in
                     if let sender = action.sender as? UISwitch {
-                        let center = UNUserNotificationCenter.current()
-                        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-                            if let error = error {
-                                // Handle the error here.
-                            }
-                            // Enable or disable features based on the authorization.
-                        }
-                        let bad_center = UNUserNotificationCenter.current()
-                        bad_center.getNotificationSettings { settings in
-                            guard (settings.authorizationStatus == .authorized) ||
-                                  (settings.authorizationStatus == .provisional) else { return }
-                            if settings.alertSetting == .enabled {
-                                // Schedule an alert-only notification.
-                                UserDefaults.standard.set(sender.isOn, forKey: "Saved")
-                            } else {
-                                // Schedule a notification with a badge and sound.
-                                UserDefaults.standard.set(false, forKey: "Saved")
-                            }
-                        }
+                        self.handleNotificationToggle(key: "NotifyForSaved", sender: sender)
                     }
                 }), for: .valueChanged)
             case 1:
                 toggleCell.textLabel?.text = "Notify for Recent Bill Updates"
-                toggleCell.toggle.isOn = UserDefaults.standard.bool(forKey: "Recent")
+                toggleCell.toggle.isOn = UserDefaults.standard.bool(forKey: "NotifyForRecent")
                 toggleCell.toggle.addAction(.init(handler: { (action) in
                     if let sender = action.sender as? UISwitch {
-                        let center = UNUserNotificationCenter.current()
-                        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-                            if let error = error {
-                                // Handle the error here.
-                            }
-                            // Enable or disable features based on the authorization.
-                        }
-                        center.getNotificationSettings { settings in
-                            guard (settings.authorizationStatus == .authorized) ||
-                                  (settings.authorizationStatus == .provisional) else { return }
-                            if settings.alertSetting == .enabled {
-                                // Schedule an alert-only notification.
-                                UserDefaults.standard.set(sender.isOn, forKey: "Recent")
-                            } else {
-                                // Schedule a notification with a badge and sound.
-                                UserDefaults.standard.set(false, forKey: "Recent")
-                            }
-                        }
+                        self.handleNotificationToggle(key: "NotifyForRecent", sender: sender)
                     }
                 }), for: .valueChanged)
             default:
