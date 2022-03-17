@@ -11,6 +11,7 @@ class ToggleCell: UITableViewCell {
         toggle = UISwitch()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         accessoryView = toggle
+        toggle.onTintColor = .legalPurple
     }
     override func prepareForReuse() {
         super.prepareForReuse()
