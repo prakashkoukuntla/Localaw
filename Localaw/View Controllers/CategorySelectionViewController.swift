@@ -63,8 +63,8 @@ class CategorySelectionViewController: UIViewController {
         categorySelectionView.applyInitialSnapshot()
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loadingIndicator.centerXAnchor.constraint(equalTo: categorySelectionView.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: categorySelectionView.centerYAnchor)
         ])
 
         loadingIndicator.startAnimating()

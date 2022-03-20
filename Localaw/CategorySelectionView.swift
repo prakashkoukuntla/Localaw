@@ -31,7 +31,7 @@ class CategorySelectionView: UIView {
     init(selectedCategories: Set<String>) {
         self.selectedCategories = selectedCategories
         selectAllView = UIView()
-        let layout = UICollectionViewFlowLayout()
+        let layout = LeftAlignedUICollectionViewFlowLayout()
         // layout.itemSize = .init(width: 50, height: 20)
         layout.estimatedItemSize = .init(width: 1, height: 1)
         // layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
