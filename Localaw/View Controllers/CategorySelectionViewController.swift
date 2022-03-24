@@ -50,7 +50,14 @@ class CategorySelectionViewController: UIViewController {
         stackView.addArrangedSubview(SpacerView())
         stackView.addArrangedSubview(makeContinueButton())
         
-        stackView.addSubview(loadingIndicator)
+        if UserDefaults.standard.bool(forKey: "wasLaunched") == false {
+            stackView.addSubview(loadingIndicator)
+            loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                loadingIndicator.centerXAnchor.constraint(equalTo: categorySelectionView.centerXAnchor),
+                loadingIndicator.centerYAnchor.constraint(equalTo: categorySelectionView.centerYAnchor)
+            ])
+        }
         
         containerView.embed(view: stackView,
                             padding: .init(top: 20, left: 20, bottom: 20, right: 20))
@@ -61,11 +68,6 @@ class CategorySelectionViewController: UIViewController {
         super.viewDidLoad()
         isModalInPresentation = true
         categorySelectionView.applyInitialSnapshot()
-        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            loadingIndicator.centerXAnchor.constraint(equalTo: categorySelectionView.centerXAnchor),
-            loadingIndicator.centerYAnchor.constraint(equalTo: categorySelectionView.centerYAnchor)
-        ])
 
         loadingIndicator.startAnimating()
     }
@@ -73,6 +75,7 @@ class CategorySelectionViewController: UIViewController {
     func makeWelcomeLabel() -> UILabel {
         let label = UILabel()
         label.text = "Welcome To:"
+        label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }
 
@@ -116,6 +119,7 @@ class CategorySelectionViewController: UIViewController {
     func makeNameLabel() -> UILabel {
         let label = UILabel()
         label.text = "Localaw"
+        label.font = .preferredFont(forTextStyle: .largeTitle)
         return label
     }
 
@@ -137,8 +141,9 @@ class CategorySelectionViewController: UIViewController {
 
     func makeDescriptionLabel() -> UILabel {
         let label = UILabel()
-        label.text = "Learn about your community's legislation. To get started, select bill categories you're interested in:"
+        label.text = "Learn about your community's legislation. To start, select bill categories you're interested in:"
         label.numberOfLines = 0
+        label.textAlignment = .natural
         return label
     }
 

@@ -22,6 +22,7 @@ class TagCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         label = UILabel()
+        label.numberOfLines = 0
         isChosen = false
         
         super.init(frame: frame)
