@@ -23,6 +23,9 @@ class CategorySelectionView: UIView {
             if let cell = cell as? TagCell {
                 cell.label.text = itemIdentifier
                 cell.isChosen = self.selectedCategories.contains(itemIdentifier)
+                NSLayoutConstraint.activate([
+                    cell.widthAnchor.constraint(lessThanOrEqualToConstant: 280)
+                ])
             }
             return cell
         })
@@ -31,7 +34,7 @@ class CategorySelectionView: UIView {
     init(selectedCategories: Set<String>) {
         self.selectedCategories = selectedCategories
         selectAllView = UIView()
-        let layout = UICollectionViewFlowLayout()
+        let layout = LeftAlignedUICollectionViewFlowLayout()
         // layout.itemSize = .init(width: 50, height: 20)
         layout.estimatedItemSize = .init(width: 1, height: 1)
         // layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -80,7 +83,7 @@ class CategorySelectionView: UIView {
         let categoryStrings = categories.compactMap {
             $0.cdName
         }
-        let uniqueCategoryStrings = Array(Set(categoryStrings))
+        let uniqueCategoryStrings = Set(categoryStrings).sorted()
         var initialSnapshot = NSDiffableDataSourceSnapshot<Int, String>()
         initialSnapshot.appendSections([0])
         initialSnapshot.appendItems(uniqueCategoryStrings)
