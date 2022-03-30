@@ -24,6 +24,13 @@ enum WebServiceError: Error, LocalizedError {
 }
 
 class WebService {
+    enum Constants {
+        static let billsURL = "https://cogar.denvertech.org/api/v1/bills.json"
+        static let legislatorsURL = "https://cogar.denvertech.org/api/v1/legislators.json"
+        static let committeesURL = "https://cogar.denvertech.org/api/v1/committees.json"
+        
+    }
+    
     struct Bill: Codable {
         var billNum: String
         var title: String
@@ -107,7 +114,7 @@ class WebService {
     }
 
     func fetchBills(completion: @escaping (Result<[Bill], WebServiceError>) -> Void) {
-        guard let url = URL(string: "https://cogar.denvertech.org/api/v1/bills.json") else { return }
+        guard let url = URL(string: Constants.billsURL) else { return }
         let request = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
@@ -131,7 +138,7 @@ class WebService {
     }
 
     func fetchLegislators() {
-        guard let url = URL(string: "https://cogar.denvertech.org/api/v1/legislators.json") else { return }
+        guard let url = URL(string: Constants.legislatorsURL) else { return }
         let request = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
@@ -154,7 +161,7 @@ class WebService {
     }
 
     func fetchCommittees() {
-        guard let url = URL(string: "https://cogar.denvertech.org/api/v1/committees.json") else { return }
+        guard let url = URL(string: Constants.committeesURL) else { return }
         let request = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
