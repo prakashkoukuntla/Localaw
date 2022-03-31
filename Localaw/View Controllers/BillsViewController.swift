@@ -6,9 +6,9 @@ import Foundation
 import UIKit
 import CoreData
 
-open class BillsDataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID> {
+open class BillsDataSource: UITableViewDiffableDataSource<String, NSManagedObjectID> {
 
-    public typealias CellProvider = UITableViewDiffableDataSource<Int, NSManagedObjectID>.CellProvider
+    public typealias CellProvider = UITableViewDiffableDataSource<String, NSManagedObjectID>.CellProvider
     public typealias Controller = NSFetchedResultsController<CDBill>
     public typealias Request = NSFetchRequest<CDBill>
 
@@ -150,9 +150,8 @@ open class BillsViewController<DataSource: BillsDataSource>: UIViewController, U
     }
 
     // MARK: - NSFetchedResultsControllerDelegate
-
-    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                           didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
-        dataSource.apply(snapshot as NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>)
+    
+    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+        dataSource.apply(snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>)
     }
 }
