@@ -76,10 +76,10 @@ extension SettingsViewController: UITableViewDataSource {
             DispatchQueue.main.async {
                 switch settings.authorizationStatus {
                 case .notDetermined:
-                    promptForAuthorization(sender: sender, center: center, key: key)
+                    self.promptForAuthorization(sender: sender, center: center, key: key)
                 case .denied:
                     sender.isOn = false
-                    promptForChangeNotificationSettings()
+                    self.promptForChangeNotificationSettings()
                 case .authorized, .ephemeral, .provisional:
                     UserDefaults.standard.setValue(sender.isOn, forKey: key)
                 @unknown default:

@@ -38,10 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 switch result {
                 case .success(let bills):
                     for bill in bills {
-                        let cdBill = CDBill(context: database.context)
+                        let cdBill = CDBill(context: self.database.context)
                         cdBill.billNum = bill.billNum
                         cdBill.billStatus = bill.billStatus
-                        let billCategory = CDBillCategory(context: database.context)
+                        let billCategory = CDBillCategory(context: self.database.context)
                         billCategory.cdName = bill.category
                         cdBill.category = billCategory
                         // cdBill.committees = bill.committees
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         formatter.dateFormat = "yyyy-MM-dd"
                         
                         let history: [CDHistory] = bill.summarizedHistory.map {
-                            let history = CDHistory(context: database.context)
+                            let history = CDHistory(context: self.database.context)
                             history.date = formatter.date(from: $0.date)
                             history.action = $0.action
                             history.location = $0.location
@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print(error.localizedDescription)
                 }
 
-                database.saveContext()
+                self.database.saveContext()
                 NotificationCenter.default.post(name: .billsUpdated, object: nil)
                 UserDefaults.standard.setValue(true, forKey: "Bills Downloaded")
             }
