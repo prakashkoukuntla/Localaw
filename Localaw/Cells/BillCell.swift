@@ -35,7 +35,7 @@ class BillCell: UITableViewCell {
                     .constraint(equalTo: contentView.topAnchor),
                 bookmarkImageView
                     .trailingAnchor
-                    .constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
+                    .constraint(equalTo: trailingAnchor, constant: -12)
             ])
         }
 
