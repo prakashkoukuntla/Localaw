@@ -17,7 +17,7 @@ class RecentBillsDataSource: BillsDataSource {
     
     class func makeFetchRequest() -> NSFetchRequest<CDBill> {
         let request: Request = CDBill.fetchRequest()
-        request.sortDescriptors = [.init(key: "category.cdName", ascending: true)]
+        request.sortDescriptors = [.init(key: "category.cdName", ascending: true), .init(key: "title", ascending: true)]
         request.predicate = makePredicate()
         return request
     }
@@ -31,6 +31,10 @@ class RecentBillsDataSource: BillsDataSource {
 }
 
 class RecentBillsViewController: BillsViewController<RecentBillsDataSource> {
+    
+    // MARK: - Variables
+    
+    override var noDataLabelText: String { return "No recent bills for the categories you've selected." }
     
     // MARK: - Initialization
     
@@ -51,7 +55,7 @@ class RecentBillsViewController: BillsViewController<RecentBillsDataSource> {
     // MARK: - Configuration
     
     override func configureNavigationController() {
-        navigationController?.navigationBar.prefersLargeTitles = true
+        super.configureNavigationController()
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "Filter"),
             style: .plain,

@@ -20,6 +20,10 @@ class SavedBillsDataSource: BillsDataSource {
 }
 
 class SavedBillsViewController: BillsViewController<SavedBillsDataSource> {
+    
+    // MARK: - Variables
+    
+    override var noDataLabelText: String { return "You haven't saved any bills yet." }
 
     // MARK: - Initialization
 
@@ -33,17 +37,5 @@ class SavedBillsViewController: BillsViewController<SavedBillsDataSource> {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - View lifecycle
-
-    override func loadView() {
-        view = tableView
-    }
-
-    // MARK: - Configuration
-
-    override func configureNavigationController() {
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }

@@ -30,12 +30,12 @@ class TagCell: UICollectionViewCell {
         contentView.embed(view: label, padding: .init(top: 4, left: 4, bottom: 4, right: 4))
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        let anchor = contentView.rightAnchor.constraint(equalTo: rightAnchor)
-        anchor.priority = .defaultHigh
-        
+        let leftAnchor = contentView.leftAnchor.constraint(equalTo: leftAnchor)
+        leftAnchor.priority = .init(rawValue: 999)
+
         NSLayoutConstraint.activate([
-            contentView.leftAnchor.constraint(equalTo: leftAnchor),
-            anchor,
+            leftAnchor,
+            contentView.rightAnchor.constraint(equalTo: rightAnchor),
             contentView.topAnchor.constraint(equalTo: topAnchor),
             contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])

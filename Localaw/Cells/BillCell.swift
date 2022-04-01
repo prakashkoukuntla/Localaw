@@ -13,10 +13,10 @@ class BillCell: UITableViewCell {
         bookmarkImageView.removeFromSuperview()
     }
     
-    func configure(with bill: CDBill) {
+    func configure(with item: BillItem) {
         var configuration = UIListContentConfiguration.subtitleCell()
-        configuration.text = bill.title
-        configuration.secondaryText = bill.longTitle
+        configuration.text = item.title
+        configuration.secondaryText = item.description
         configuration.textToSecondaryTextVerticalPadding = 5
         configuration.secondaryTextProperties.color = .darkGray
         configuration.secondaryTextProperties.font = .systemFont(ofSize: 13)
@@ -24,7 +24,7 @@ class BillCell: UITableViewCell {
         accessoryType = .disclosureIndicator
         contentConfiguration = configuration
         
-        if bill.saved {
+        if item.isSaved {
             let image = UIImage(systemName: "bookmark.fill")
             bookmarkImageView = UIImageView(image: image)
             bookmarkImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,6 +38,5 @@ class BillCell: UITableViewCell {
                     .constraint(equalTo: trailingAnchor, constant: -12)
             ])
         }
-
     }
 }
