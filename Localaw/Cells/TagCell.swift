@@ -30,11 +30,11 @@ class TagCell: UICollectionViewCell {
         contentView.embed(view: label, padding: .init(top: 4, left: 4, bottom: 4, right: 4))
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        let leftAnchor = contentView.leftAnchor.constraint(equalTo: leftAnchor)
-        leftAnchor.priority = .init(rawValue: 999)
+        let contentViewLeftAnchor = contentView.leftAnchor.constraint(equalTo: leftAnchor)
+        contentViewLeftAnchor.priority = .init(rawValue: 999)
 
         NSLayoutConstraint.activate([
-            leftAnchor,
+            contentViewLeftAnchor,
             contentView.rightAnchor.constraint(equalTo: rightAnchor),
             contentView.topAnchor.constraint(equalTo: topAnchor),
             contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -62,9 +62,9 @@ class TagCell: UICollectionViewCell {
             contentView.layer.cornerCurve = .continuous
             contentView.layer.masksToBounds = true
         } else {
-            label.textColor = .black
-            contentView.backgroundColor = .white
-            contentView.layer.borderColor = UIColor.black.cgColor
+            label.textColor = .label
+            contentView.backgroundColor = .tertiarySystemBackground
+            contentView.layer.borderColor = UIColor.systemFill.cgColor
             contentView.layer.borderWidth = 1
             contentView.layer.cornerRadius = 4
             contentView.layer.cornerCurve = .continuous

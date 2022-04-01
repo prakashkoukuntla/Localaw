@@ -39,8 +39,8 @@ class CategorySelectionView: UIView {
         layout.estimatedItemSize = .init(width: 1, height: 1)
         // layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         tagView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        tagView.backgroundColor = .white
-        tagView.layer.borderColor = UIColor.lightGray.cgColor
+        tagView.backgroundColor = .secondarySystemBackground
+        tagView.layer.borderColor = UIColor.systemFill.cgColor
         tagView.layer.borderWidth = 1
         tagView.layer.cornerRadius = 8
         tagView.layer.masksToBounds = true

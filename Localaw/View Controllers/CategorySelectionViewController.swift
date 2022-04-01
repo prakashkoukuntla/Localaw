@@ -30,7 +30,7 @@ class CategorySelectionViewController: UIViewController {
 
     override func loadView() {
         let containerView = UIView()
-        containerView.backgroundColor = .white
+        containerView.backgroundColor = .systemBackground
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
