@@ -12,6 +12,8 @@ class CategorySelectionViewController: UIViewController {
     weak var context: NSManagedObjectContext?
     var selectedCategories: Set<String>
     var loadingIndicator = UIActivityIndicatorView(style: .large)
+    
+    var imageView: UIImageView = CategorySelectionViewController.makeLogoImageView()
 
     init(context: NSManagedObjectContext, selectedCategories: Set<String>) {
         self.context = context
@@ -32,22 +34,20 @@ class CategorySelectionViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
+        stackView.distribution = .equalSpacing
         stackView.spacing = 10
         if UserDefaults.standard.array(forKey: "selectedCategories") == nil {
             stackView.addArrangedSubview(makeWelcomeLabel())
             stackView.addArrangedSubview(makeNameLabel())
-            stackView.addArrangedSubview(makeLogoImageView())
+            stackView.addArrangedSubview(imageView)
             stackView.addArrangedSubview(makeDescriptionLabel())
         } else {
-            // stackView.addArrangedSubview(SpacerView()) //SPACER VIEW DOES NOT WORK
-            stackView.addArrangedSubview(makeBadSpacer())
             stackView.addArrangedSubview(makeNameLabel())
-            stackView.addArrangedSubview(makeLogoImageView())
+            stackView.addArrangedSubview(imageView)
             stackView.addArrangedSubview(makeSecondDescriptionLabel())
         }
         stackView.addArrangedSubview(categorySelectionView)
         stackView.addArrangedSubview(numberSelectedLabel)
-        stackView.addArrangedSubview(SpacerView())
         stackView.addArrangedSubview(makeContinueButton())
         
         if UserDefaults.standard.bool(forKey: "wasLaunched") == false {
@@ -59,8 +59,16 @@ class CategorySelectionViewController: UIViewController {
             ])
         }
         
-        containerView.embed(view: stackView,
-                            padding: .init(top: 20, left: 20, bottom: 20, right: 20))
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            containerView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 20),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: containerView.topAnchor, constant: 20),
+            containerView.bottomAnchor.constraint(greaterThanOrEqualTo: stackView.bottomAnchor, constant: 20),
+            stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+        ])
+        
         view = containerView
     }
 
@@ -70,6 +78,11 @@ class CategorySelectionViewController: UIViewController {
         categorySelectionView.applyInitialSnapshot()
 
         loadingIndicator.startAnimating()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        imageView.isHidden = size.height < 500
     }
 
     func makeWelcomeLabel() -> UILabel {
@@ -100,8 +113,6 @@ class CategorySelectionViewController: UIViewController {
         NSLayoutConstraint.activate([
             button.widthAnchor.constraint(equalToConstant: 120),
             button.heightAnchor.constraint(equalToConstant: 44)
-            // button.leadingAnchor.constraint(equalToConstant: 110),
-            // button.widthAnchor.constraint(equalToConstant: 110),
         ])
         return button
     }
@@ -123,19 +134,19 @@ class CategorySelectionViewController: UIViewController {
         return label
     }
 
-    func makeBadSpacer() -> UILabel {
-        let label = UILabel()
-        label.text = "\n"
-        return label
-    }
-
-    func makeLogoImageView() -> UIImageView {
+    static func makeLogoImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "InvertedLogo")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let height = imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 100)
+        let width = imageView.widthAnchor.constraint(lessThanOrEqualToConstant: 100)
+        
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 100),
-            imageView.widthAnchor.constraint(equalToConstant: 100)
+            height,
+            width
         ])
+        
         return imageView
     }
 
