@@ -205,7 +205,6 @@ open class BillsViewController<DataSource: BillsDataSource>: UIViewController, U
                     description: $0.longTitle,
                     isSaved: $0.saved,
                     uuid: $0.objectID) }
-            print(itemIdentifiers.map { $0.title })
             mySnapshot.appendItems(itemIdentifiers, toSection: section)
         }
         
