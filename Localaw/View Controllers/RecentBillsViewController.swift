@@ -9,7 +9,7 @@ class RecentBillsDataSource: BillsDataSource {
     
     class func makePredicate() -> NSPredicate {
         let categories = UserDefaults.standard.array(forKey: "selectedCategories") as? [String] ?? []
-        let weekAgo = Date(timeIntervalSinceNow: -60 * 60 * 24 * 7)
+        let weekAgo = Date(timeIntervalSinceNow: -60 * 60 * 24 * 17)
         return NSPredicate(format: "(SUBQUERY(summarizedHistory.date, $date, $date >= %@) .@count > 0) AND category.cdName IN %@",
                            weekAgo as NSDate,
                            categories)
