@@ -145,10 +145,10 @@ open class BillsViewController<DataSource: BillsDataSource>: UIViewController, U
         noDataLabel.numberOfLines = 0
         noDataLabel.isHidden = true
         noDataLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(noDataLabel)
+        tableView.addSubview(noDataLabel)
         NSLayoutConstraint.activate([
-            noDataLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            noDataLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            noDataLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            noDataLabel.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 60),
             noDataLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
             noDataLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
