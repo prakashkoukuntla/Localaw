@@ -23,14 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         cdBill.billStatus = bill.billStatus
                         let billCategory = CDBillCategory(context: self.database.context)
                         billCategory.cdName = bill.category
+                        if bill.category == "" {
+                            billCategory.cdName = "Uncategorized"
+                        }
                         cdBill.category = billCategory
-                        // cdBill.committees = bill.committees
                         cdBill.fullTopic = bill.fullTopic
                         cdBill.info = bill.description
                         cdBill.longTitle = bill.longTitle
                         cdBill.originalChamber = bill.originalChamber
                         cdBill.sessionTitle = bill.sessionTitle
-                        // cdBill.sponsors
                         cdBill.title = bill.title
                         cdBill.websiteLink = bill.websiteLink
                         

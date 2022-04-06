@@ -50,7 +50,7 @@ class CategorySelectionViewController: UIViewController {
         stackView.addArrangedSubview(numberSelectedLabel)
         stackView.addArrangedSubview(makeContinueButton())
         
-        if UserDefaults.standard.bool(forKey: "wasLaunched") == false {
+        if UserDefaults.standard.bool(forKey: "Bills Downloaded") != true {
             stackView.addSubview(loadingIndicator)
             loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
